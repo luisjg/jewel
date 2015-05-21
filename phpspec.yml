@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Jewel
+        psr4_prefix: Jewel
+        src_path: app

@@ -1,0 +1,15 @@
+# Laravel
+/bootstrap/compiled.php
+/vendor
+/node_modules
+.env
+.env.*.php
+.env.php
+
+# Composer
+composer.phar
+composer.lock
+
+# OS
+.DS_Store
+Thumbs.db
