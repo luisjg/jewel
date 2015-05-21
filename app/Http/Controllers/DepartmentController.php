@@ -29,7 +29,7 @@ class DepartmentController extends Controller {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
 		}])
 		->get();
- 
+		
 		// Build Department Listing
 		$deptList = '';
 
@@ -48,7 +48,7 @@ class DepartmentController extends Controller {
 		$deptList = preg_replace('/(\\n)|(\\t)/', '', $deptList);
 		
 		// Optional HTML Formatting
-		if (\Request::get('format') == 'html') {
+		if (\Request::get('format') === 'html') {
 			return $deptList;
 		}
 
