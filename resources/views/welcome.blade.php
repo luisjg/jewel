@@ -32,16 +32,12 @@
 				margin-bottom: 40px;
 			}
 
-			.quote {
-				font-size: 24px;
-			}
 		</style>
 	</head>
-	<body>
+	<body style="background-image: url({{ asset('imgs/jewel.jpg') }});">
 		<div class="container">
 			<div class="content">
-				<div class="title">Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
+				<div class="title">Jewel</div>
 			</div>
 		</div>
 	</body>
