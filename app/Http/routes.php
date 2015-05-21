@@ -13,4 +13,4 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('data', 'DepartmentUserController@index');
+Route::get('data', 'DepartmentController@index');

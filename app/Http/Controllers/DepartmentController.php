@@ -4,10 +4,12 @@ use Jewel\Http\Requests;
 use Jewel\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Jewel\DepartmentUser;
+use Jewel\Department;
 use Jewel\Person;
+use Jewel\Http\Controllers\Response;
 
-class DepartmentUserController extends Controller {
+
+class DepartmentController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,12 +17,22 @@ class DepartmentUserController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
-		$deptList = DepartmentUser::with('Person')->where('department_id', 'academic_departments:189')->get();
-		return $deptList;
+	{	
+		// NEED A EASY WAY TO PASS DATA TO URL
+
+		$persons = Person::whereHas('department', function($query) {
+			$query->where('department_id', 'academic_departments:189');
+		})->get();
+
+		// Build Department Listing
+		$deptList = '';
+
+		foreach ($persons as $person) {
+			$deptList .= "<h3>{$person->common_name}</h3><ul><li><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li><li><strong>Biography: </strong>{$person->biography}</li><li><a href='https://faculty-demo.sandbox.csun.edu/people/{$person->getEmailURIAttribute()}'>View Profile</a></li></ul>";
+		}
+		// return $deptList;
 		
-		// return response()->json(['data' => $users]);
-		//                  // ->setCallback($request->input('callback'));
+		return response()->json(['data' => $deptList]);
 
 	}
 
