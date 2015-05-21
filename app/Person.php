@@ -8,8 +8,8 @@ class Person extends Model {
 	protected $primaryKey = 'user_id';
 	protected $fillable = [];
 
-	public function department(){
-		return $this->hasMany('Jewel\Department', 'user_id');
+	public function departmentUser(){
+		return $this->hasMany('Jewel\DepartmentUser', 'user_id');
 	}
 
 	public function getEmailURIAttribute() {

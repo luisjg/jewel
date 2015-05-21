@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model {
+class DepartmentUser extends Model {
 
 	protected $table = 'faculty.department_user';		
 	protected $fillable = [];
