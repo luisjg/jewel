@@ -46,13 +46,15 @@ class DepartmentController extends Controller {
 
 		// Remove Newline & Tabs
 		$deptList = preg_replace('/(\\n)|(\\t)/', '', $deptList);
-		
+				
 		// Optional HTML Formatting
 		if (\Request::get('format') === 'html') {
 			return $deptList;
 		}
 
-		return response()->json(['data' => $deptList]);
+		// return Response::json(['data' => $deptList])->setCallback('jsonp_received');
+
+		return response()->json([['data' => $deptList]])->setCallback('jsonp_received');
 
 	}
 
