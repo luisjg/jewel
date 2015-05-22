@@ -29,31 +29,40 @@ class DepartmentController extends Controller {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
 		}])
 		->get();
-		
-		// Build Department Listing
-		$deptList = '';
+
+		// Separate Data By Role
+		$roles = ['chair','faculty','lecturer','emeritus'];
+		$chair = ""; $faculty = ""; $lecturer = ""; $emeritus = ""; $staff = "";
 
 		foreach ($persons as $person) {
-			$deptList .= "
-			<h3 class='jewel-common-name'>{$person->common_name}</h3>
-			<ul>
-				<li class='jewel-role-name'><strong>Role: </strong>{$person->departmentUser->first()->role_name}</li>
-				<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
-				<li class='jewel-bio'><strong>Biography: </strong>{$person->biography}</li>
-				<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/people/{$person->getEmailURIAttribute()}'>View Profile</a></li>
-			</ul>";
+			// // Interpolate The Variable & Append Markup
+			if (in_array( $person->departmentUser->first()->role_name, $roles)) {
+				${$person->departmentUser->first()->role_name} .= "
+				<h3 class='jewel-common-name'>{$person->common_name}</h3>
+				<ul>
+					<li class='jewel-role-name'><strong>Role: </strong>{$person->departmentUser->first()->role_name}</li>
+					<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
+					<li class='jewel-bio'><strong>Biography: </strong>{$person->biography}</li>
+					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/people/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+				</ul>";
+			}
 		}
 
+		// Build Department Listing
+		$deptList = "";
+		foreach ($roles as $role) {
+			$deptList .= "<h2 id='{$role}'>".ucwords($role)."</h2>".${$role}."<hr>";
+		}
+		
 		// Remove Newline & Tabs
 		$deptList = preg_replace('/(\\n)|(\\t)/', '', $deptList);
-				
+
 		// Optional HTML Formatting
 		if (\Request::get('format') === 'html') {
 			return $deptList;
 		}
 
-		// return Response::json(['data' => $deptList])->setCallback('jsonp_received');
-
+		// Dumb Web-One Needs A Double Casted Array
 		return response()->json([['data' => $deptList]])->setCallback('jsonp_received');
 
 	}
