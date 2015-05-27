@@ -28,6 +28,7 @@ class DepartmentController extends Controller {
 		->with(['departmentUser' => function($q) use ($dept_id) {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
 		}])
+		->orderBy('last_name')->orderBy('first_name')
 		->get();
 
 		// Separate Data By Role
