@@ -3,6 +3,8 @@
 /vendor
 /node_modules
 .env
+.env.*
+!.env.example
 .env.*.php
 .env.php
 

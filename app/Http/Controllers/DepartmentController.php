@@ -11,15 +11,18 @@ use Jewel\Http\Controllers\Response;
 
 class DepartmentController extends Controller {
 
+	public function index() {
+		//
+	}
+
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the people in the given department.
 	 *
+	 * @param integer $dept_id The ID of the academic department
 	 * @return Response
 	 */
-	public function index()
-	{	
-		$dept_id = \Request::get('department_id');
-
+	public function showPeople($dept_id)
+	{
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
 		$persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
@@ -104,7 +107,7 @@ class DepartmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($dept_id)
 	{
 		//
 	}
@@ -115,7 +118,7 @@ class DepartmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($dept_id)
 	{
 		//
 	}
@@ -126,7 +129,7 @@ class DepartmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($dept_id)
 	{
 		//
 	}
@@ -137,7 +140,7 @@ class DepartmentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($dept_id)
 	{
 		//
 	}

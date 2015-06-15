@@ -13,4 +13,15 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('data', 'DepartmentController@index');
+// all API data routes are prefixed with /api
+Route::group(['prefix' => 'api'], function() {
+
+	// academic department information
+	Route::get('departments/{dept_id}/people', 'DepartmentController@showPeople');
+	Route::resource('departments', 'DepartmentController');
+
+	// TODO: committee information
+	//Route::get('committees/{committee_id}/people', 'CommitteeController@showPeople');
+	//Route::resource('committees/{committee_id}', 'CommitteeController');
+
+});
