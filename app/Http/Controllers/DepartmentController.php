@@ -1,5 +1,7 @@
 <?php namespace Jewel\Http\Controllers;
 
+use Jewel\Handlers\HandlerUtilities;
+
 use Jewel\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -64,20 +66,12 @@ class DepartmentController extends Controller {
 		foreach ($roles as $role => $data) {
 			$deptList .= "<h2 id='{$role}'>".ucwords($role)."</h2>${data}<hr>";
 		}
-		
-		// Remove Newline & Tabs
-		$deptList = preg_replace('/(\\n)|(\\t)/', '', $deptList);
 
-		// Optional HTML Formatting
-		if (\Request::get('format') === 'html') {
-			return $deptList;
-		}
+		// remove control characters from the output
+		$deptList = HandlerUtilities::removeControlCharacters($deptList);
 
-		$deptList = preg_replace('/(\\n)|(\\t)/', '', $deptList);
-
-		// Dumb Web-One Needs A Double Casted Array
-		return response()->json([['data' => $deptList]])->setCallback('jsonp_received');
-
+		// send the response
+		return $this->sendResponse($deptList);
 	}
 
 	/**
