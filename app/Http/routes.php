@@ -17,11 +17,11 @@ Route::get('/', 'WelcomeController@index');
 Route::group(['prefix' => 'api'], function() {
 
 	// academic department information
+	// Example: /api/departments/189/people
 	Route::get('departments/{dept_id}/people', 'DepartmentController@showPeople');
-	Route::resource('departments', 'DepartmentController');
 
-	// TODO: committee information
-	//Route::get('committees/{committee_id}/people', 'CommitteeController@showPeople');
-	//Route::resource('committees/{committee_id}', 'CommitteeController');
+	// committee information
+	// Example: /api/committees/atc/people
+	Route::get('committees/{committee_id}/people', 'CommitteeController@showPeople');
 
 });

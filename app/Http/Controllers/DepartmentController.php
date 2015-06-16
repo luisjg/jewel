@@ -1,6 +1,5 @@
 <?php namespace Jewel\Http\Controllers;
 
-use Jewel\Http\Requests;
 use Jewel\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

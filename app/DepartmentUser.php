@@ -11,5 +11,14 @@ class DepartmentUser extends Model {
 		return $this->belongsTo('Jewel\Person', 'user_id');
 	}
 
+	/**
+	 * Returns the academic department to which this user belongs.
+	 *
+	 * @return Builder|Model
+	 */
+	public function department() {
+		return $this->belongsTo('Jewel\AcademicDepartment', 'department_id');
+	}
+
 }
 
