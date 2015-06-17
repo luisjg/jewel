@@ -1,5 +1,7 @@
 <?php namespace Jewel\Http\Controllers;
 
+use Jewel\Handlers\HandlerUtilities;
+
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,15 +19,14 @@ abstract class Controller extends BaseController {
 	 * @return string|Response
 	 */
 	protected function sendResponse($data) {
+		// Add web-one formatting if requested
+		if(Request::get('web-one') == 'true'){
+			$data = HandlerUtilities::addWebOneStyle($data);
+		}
+
 		// Optional HTML Formatting
 		if (Request::get('format') == 'html') {
 			return $data;
-		}
-
-		// Returns with web-one formatting
-		if(Request::get('format') == 'web-one'){
-			return addWebOneStyle($data);
-
 		}
 
 		// Dumb Web-One Needs A Double Casted Array

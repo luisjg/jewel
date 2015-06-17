@@ -3,6 +3,29 @@
 class HandlerUtilities
 {
 	/**
+	 * Adds relevant Web-One styles to the data (table markup, in this case) and
+	 * returns the modified markup.
+	 *
+	 * @param string $data The data to modify
+	 * @return string
+	 */
+	public static function addWebOneStyle($data) {
+		// Adds border="0" to table tage
+		$data = str_replace("<table>", "<table border=\"0\">", $data);
+
+		// Tags every even tr with an even class and every odd tr with an odd class
+		$i=0;
+		$data = preg_replace_callback('/\<tr\>/',function($matches) use(&$i){		
+			$val = '<tr class="'.($i%2==0?'even':'odd').'">';
+			$i++;
+			return $val;
+		},
+		$data);
+
+		return $data;
+	}
+
+	/**
 	 * Takes a formatted attribute string and converts it to an array. In
 	 * the attribute string, key/value pairs can be separated by pipe characters.
 	 * The array that comes back is associative.
