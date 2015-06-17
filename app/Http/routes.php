@@ -25,3 +25,6 @@ Route::group(['prefix' => 'api'], function() {
 	Route::get('committees/{committee_id}/people', 'CommitteeController@showPeople');
 
 });
+
+// legacy route to support /data?department_id=[dept_id]
+Route::get('data', 'DepartmentController@showData');

@@ -3,7 +3,7 @@
 use Jewel\Handlers\HandlerUtilities;
 
 use Jewel\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Request;
 
 use Jewel\Department;
 use Jewel\Person;
@@ -14,6 +14,12 @@ class DepartmentController extends Controller {
 
 	public function index() {
 		//
+	}
+
+	// temporary route to support /data?department_id=[dept_id]
+	public function showData() {
+		$dept_id = Request::get('department_id');
+		return $this->showPeople($dept_id);
 	}
 
 	/**
