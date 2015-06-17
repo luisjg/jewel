@@ -22,8 +22,15 @@ abstract class Controller extends BaseController {
 			return $data;
 		}
 
+		// Returns with web-one formatting
+		if(Request::get('format') == 'web-one'){
+			return addWebOneStyle($data);
+
+		}
+
 		// Dumb Web-One Needs A Double Casted Array
 		return response()->json([['data' => $data]])->setCallback('jsonp_received');
 	}
+
 
 }
