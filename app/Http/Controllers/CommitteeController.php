@@ -69,10 +69,16 @@ class CommitteeController extends Controller {
 				// generate the name of the role
 				$roleName = ucwords(str_replace("_", " ", $position));
 
+				// should there be a link to a Faculty profile?
+				$nameMarkup = $person->common_name;
+				if($position == "chair" || $position == "member") {
+					$nameMarkup = "<a href='http://metalab.csun.edu/faculty/people/{$person->email_uri}' target='_blank'>$nameMarkup</a>";
+				}
+
 				// add the data to the proper key
 				$roles[$position] .= "
 				<tr>
-					<td>{$person->common_name}</td>
+					<td>{$nameMarkup}</td>
 					<td>{$roleName}</td>
 					<td>{$person->pivot->description}</td>
 					<td>{$memberOf}</td>
