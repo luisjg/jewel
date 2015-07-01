@@ -62,7 +62,7 @@ class DepartmentController extends Controller {
 					<li class='jewel-role-name'><strong>Role: </strong>{$person->departmentUser->first()->role_name}</li>
 					<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
 					<li class='jewel-bio'><strong>Biography: </strong>{$person->biography}</li>
-					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/people/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
 				</ul>";
 			}
 		}
