@@ -59,7 +59,7 @@ class DepartmentController extends Controller {
 				$roles[$role_name] .= "
 				<h3 class='jewel-common-name'>{$person->common_name}</h3>
 				<ul>
-					<li class='jewel-role-name'><strong>Role: </strong>{$person->departmentUser->first()->role_name}</li>
+					<li class='jewel-role-name'><strong>Role: </strong>{$person->rank}</li>
 					<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
 					<li class='jewel-bio'><strong>Biography: </strong>{$person->biography}</li>
 					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
@@ -68,13 +68,20 @@ class DepartmentController extends Controller {
 		}
 
 		// Build Department Listing
-		$deptList = "";
+		$deptList = "
+		<style>
+
+		</style> 
+		";
+
 		foreach ($roles as $role => $data) {
 			$deptList .= "<h2 id='{$role}'>".ucwords($role)."</h2>${data}<hr>";
 		}
 
 		// remove control characters from the output
 		$deptList = HandlerUtilities::removeControlCharacters($deptList);
+
+		return $deptList;
 
 		// send the response
 		return $this->sendResponse($deptList);
