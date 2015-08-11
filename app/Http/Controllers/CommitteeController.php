@@ -36,8 +36,6 @@ class CommitteeController extends Controller {
 			'permanent_guest' => ''
 		];
 
-		//return $committee->people;
-
 		// iterate over the associated people and add them to the respective key
 		foreach($committee->people as $person) {
 			$position = $person->pivot->role_position;
@@ -119,8 +117,6 @@ class CommitteeController extends Controller {
 			<tbody>";
 		$data .= implode("", $roles);
 		$data .= "</tbody></table>";
-
-		return $data;
 
 		// remove control characters from the output
 		$data = HandlerUtilities::removeControlCharacters($data);
