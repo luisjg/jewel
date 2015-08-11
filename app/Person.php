@@ -4,11 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model {
 
-	protected $table = 'faculty.users';			
-	protected $primaryKey = 'user_id';
+	protected $table = 'fresco.people';			
+	protected $primaryKey = 'individuals_id';
 	protected $fillable = [];
 
-	public function departmentUser(){
+	public function departmentUser() {
 		return $this->hasMany('Jewel\DepartmentUser', 'user_id');
 	}
 

@@ -6,6 +6,7 @@ use Jewel\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Jewel\Committee;
+use Jewel\Contact;
 use Jewel\Http\Controllers\Response;
 
 class CommitteeController extends Controller {
@@ -34,6 +35,8 @@ class CommitteeController extends Controller {
 			'recording_secretary' => '',
 			'permanent_guest' => ''
 		];
+
+		//return $committee->people;
 
 		// iterate over the associated people and add them to the respective key
 		foreach($committee->people as $person) {
@@ -74,6 +77,20 @@ class CommitteeController extends Controller {
 				if($position == "chair" || $position == "member") {
 					$nameMarkup = "<a href='http://metalab.csun.edu/faculty/profiles/{$person->email_uri}' target='_blank'>$nameMarkup</a>";
 				}
+				else
+				{
+					// grab their contact information from their primary contact
+					// and use that in place of the "Member Of" column for something
+					// that isn't a committee
+					$contact = Contact::where('entities_id', $person->individuals_id)
+						->where("parent_entities_id", "NOT LIKE", "committees:%")
+						->orderBy('precedence', 'ASC')
+						->first();
+
+					if(!empty($contact)) {
+						$memberOf = $contact->title;
+					}
+				}
 
 				// add the data to the proper key
 				$roles[$position] .= "
@@ -102,6 +119,8 @@ class CommitteeController extends Controller {
 			<tbody>";
 		$data .= implode("", $roles);
 		$data .= "</tbody></table>";
+
+		return $data;
 
 		// remove control characters from the output
 		$data = HandlerUtilities::removeControlCharacters($data);
