@@ -45,23 +45,26 @@ class DepartmentController extends Controller {
 		$roles = [
 			'chair'=>'',
 			'faculty' =>'',
-			'lecturer'=>'',
+			'Lecturer'=>'',
 			'emeritus'=>''
 		];
 		
 		foreach ($persons as $person) {
 
 			// Grab Person Role Name
-			$role_name = $person->departmentUser->first()->role_name; 
+			$role_name = $person->departmentUser->first()->role_name;
+
+			if($person->rank === 'Lecturer') {
+				$role_name = $person->rank;
+			}
 
 			// Interpolate & Append Markup
 			if (array_key_exists($role_name, $roles)) {
 				$roles[$role_name] .= "
 				<h3 class='jewel-common-name'>{$person->common_name}</h3>
 				<ul>
-					<li class='jewel-role-name'><strong>Role: </strong>{$person->rank}</li>
+					<li class='jewel-role-name'>{$person->rank}</li>
 					<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
-					<li class='jewel-bio'><strong>Biography: </strong>{$person->biography}</li>
 					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
 				</ul>";
 			}
@@ -80,8 +83,6 @@ class DepartmentController extends Controller {
 
 		// remove control characters from the output
 		$deptList = HandlerUtilities::removeControlCharacters($deptList);
-
-		return $deptList;
 
 		// send the response
 		return $this->sendResponse($deptList);
