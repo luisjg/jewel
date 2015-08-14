@@ -12,6 +12,10 @@ class Person extends Model {
 		return $this->hasMany('Jewel\DepartmentUser', 'user_id');
 	}
 
+	public function image() {
+		return $this->hasOne('Jewel\Image', 'imageable_id');
+	}
+
 	public function getEmailURIAttribute() {
 	    return strtok($this->email, '@');
 	}
