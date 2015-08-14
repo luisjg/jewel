@@ -48,11 +48,16 @@ class DepartmentController extends Controller {
 			'Lecturer'=>'',
 			'emeritus'=>''
 		];
+
+		return $persons;
 		
 		foreach ($persons as $person) {
 
 			// Grab Person Role Name
-			$role_name = $person->departmentUser->first()->role_name;
+			$role_name = $person->departmentUser->all()->role_name;
+
+			// Grab UserID and Remove members:
+			$id_number = str_replace('members:', '', $person->user_id);
 
 			if($person->rank === 'Lecturer') {
 				$role_name = $person->rank;
@@ -62,7 +67,8 @@ class DepartmentController extends Controller {
 			if (array_key_exists($role_name, $roles)) {
 				$roles[$role_name] .= "
 				<h3 class='jewel-common-name'>{$person->common_name}</h3>
-				<ul>
+				<ul class='jewel'>
+					<li class=''><img src='https://www.metalab.csun.edu/faculty/uploads/imgs/person_{$id_number}' alt='Image of {$person->common_name}'></li>
 					<li class='jewel-role-name'>{$person->rank}</li>
 					<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
 					<li class='jewel-url'><a href='https://faculty-demo.sandbox.csun.edu/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
@@ -70,10 +76,25 @@ class DepartmentController extends Controller {
 			}
 		}
 
+		return $persons;
+
 		// Build Department Listing
 		$deptList = "
-		<style>
-
+		<style> 
+			.jewel-url a{
+				color: #CF0A2C;
+			}
+			.jewel-role-name{
+				font-size: 1.15em;
+			}
+			.jewel-common-name{
+				color: #4a4a4a;
+				font-size: 1.2em;
+			}
+			.jewel{
+				color: #4a4a4a;
+				list-style:outside none;
+			}
 		</style> 
 		";
 
@@ -83,6 +104,8 @@ class DepartmentController extends Controller {
 
 		// remove control characters from the output
 		$deptList = HandlerUtilities::removeControlCharacters($deptList);
+
+		return $deptList;
 
 		// send the response
 		return $this->sendResponse($deptList);
