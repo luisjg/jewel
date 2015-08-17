@@ -128,7 +128,8 @@ class DepartmentController extends Controller {
 			}
 			.jewel-common-name{
 				color: #4a4a4a;
-				font-size: 1.2em;
+			    font-size: 1.4em;
+    			margin: 5px 0;
 			}
 			.jewel{
 				color: #4a4a4a;
