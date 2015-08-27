@@ -84,11 +84,11 @@ class DepartmentController extends Controller {
 				$roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='https://www.metalab.csun.edu/faculty/{$img}' alt='Image of {$person->common_name}'>
+						<img class='jewel-img' src='https://www.metalab.csun.edu/faculty/{$img}' alt='Image of {$person->display_name}'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
-							<li class='jewel-faculty-name'><h3 class='jewel-common-name'>{$person->common_name}</h3></li>
+							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
 							<li class='jewel-url'><a href='https://www.metalab.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
@@ -126,7 +126,7 @@ class DepartmentController extends Controller {
 			.jewel-role-name{
 				font-size: 1.15em;
 			}
-			.jewel-common-name{
+			.jewel-display-name{
 				color: #4a4a4a;
 			    font-size: 1.4em;
     			margin: 5px 0;
