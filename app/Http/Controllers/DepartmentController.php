@@ -140,7 +140,7 @@ class DepartmentController extends Controller {
 		";
 
 		foreach ($roles as $role => $data) {
-			$deptList .= "<h2 id='{$role}'>".ucwords($role)."</h2>${data}<hr>";
+			$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
 		}
 
 		// remove control characters from the output
