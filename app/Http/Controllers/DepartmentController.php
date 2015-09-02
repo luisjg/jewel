@@ -91,7 +91,7 @@ class DepartmentController extends Controller {
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
-							<li class='jewel-url'><a target='_blank' href='https://www.metalab.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
 						</ul>
 					</div>
 				</div>
