@@ -1,0 +1,21 @@
+{
+  "name": "jewel",
+  "version": "0.0.0",
+  "authors": [
+    "Alex Hernandez <info@alejandrohernandez.me>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "none",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5"
+  }
+}

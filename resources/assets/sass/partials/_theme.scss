@@ -1,0 +1,77 @@
+body{
+	font-family: 'Lato', arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: $color-burgandy;
+}
+
+header{
+	background-color: $color-burgandy;
+	padding: 10px;
+	
+	a{
+		color: #fff;
+	}
+
+}
+
+.main-banner{
+	padding: 75px 0 150px;
+}
+
+.brand-logo{
+	margin-bottom: 40px;
+}
+
+.brand-message {
+	margin: 0 auto;
+	width: 400px;
+}
+
+.brand-action {
+	margin-top: 30px;
+
+	.btn{
+		margin: 0 6px;
+	}
+}
+
+.btn{
+	width:160px;
+	height:50px;
+	border-radius: 0;
+	border:1;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.btn-default{
+	background-color: transparent;
+	color: #fff;
+	
+	&:hover,
+	&:focus,
+	&:active{
+		background-color: #fff;
+		border-color: #fff;
+	}
+}
+
+.btn-primary{
+	background-color: $color-red;
+	border-color: $color-red;
+	color: #fff;
+
+	&:hover,
+	&:focus,
+	&:active{
+		background-color: $color-brown;
+		border-color: $color-brown;
+	}
+}
+
+.version{
+	color: $color-orange;
+	margin: 8px 40px 0 0;
+	font-style: italic;
+}
