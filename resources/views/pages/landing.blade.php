@@ -15,7 +15,7 @@
 						<div class="brand-action">						
 							<button class="btn btn-default">Learn More</button>
 							<button class="btn btn-primary">Get Started</button>
-							<div class="version text-right">Version 0.0.1</div>
+							<div class="version text-right">Version 2.1.0</div>
 						</div>
 					</div>
 				</div>
