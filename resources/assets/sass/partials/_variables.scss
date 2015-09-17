@@ -4,11 +4,7 @@ $color-red: #D93D04;
 $color-burgandy: #732002;
 $color-brown: #402721;
 
-$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
-//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
-$font-family-base:        $font-family-sans-serif !default;
+$font-family-sans-serif:  'Lato', arial, sans-serif;;
 
 $font-size-base: 16px;
 $font-size-large: ceil(($font-size-base * 1.25));

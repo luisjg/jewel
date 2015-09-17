@@ -6012,8 +6012,53 @@ p {
 .emphasis {
   color: #fff; }
 
+.btn {
+  width: 160px;
+  height: 50px;
+  border-radius: 0;
+  border: 1;
+  font-weight: bold;
+  font-size: 16px; }
+
+.btn-default {
+  background-color: transparent;
+  color: #fff; }
+  .btn-default:hover,
+  .btn-default:focus,
+  .btn-default:active {
+    background-color: #fff;
+    border-color: #fff;
+    color: #732002; }
+    .btn-default:hover:hover,
+    .btn-default:hover:focus,
+    .btn-default:focus:hover,
+    .btn-default:focus:focus,
+    .btn-default:active:hover,
+    .btn-default:active:focus {
+      background-color: #fff;
+      border-color: #fff;
+      color: #732002; }
+
+.btn-primary {
+  background-color: #D93D04;
+  border-color: #D93D04;
+  color: #fff; }
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active {
+    background-color: #402721;
+    border-color: #402721; }
+    .btn-primary:hover:hover,
+    .btn-primary:hover:focus,
+    .btn-primary:focus:hover,
+    .btn-primary:focus:focus,
+    .btn-primary:active:hover,
+    .btn-primary:active:focus {
+      background-color: #402721;
+      border-color: #402721; }
+
 body {
-  font-family: 'Lato', arial, sans-serif;
+  font-family: "Lato", arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #732002; }
@@ -6039,34 +6084,7 @@ header {
   .brand-action .btn {
     margin: 0 6px; }
 
-.btn {
-  width: 160px;
-  height: 50px;
-  border-radius: 0;
-  border: 1;
-  font-weight: bold;
-  font-size: 16px; }
-
-.btn-default {
-  background-color: transparent;
-  color: #fff; }
-  .btn-default:hover,
-  .btn-default:focus,
-  .btn-default:active {
-    background-color: #fff;
-    border-color: #fff; }
-
-.btn-primary {
-  background-color: #D93D04;
-  border-color: #D93D04;
-  color: #fff; }
-  .btn-primary:hover,
-  .btn-primary:focus,
-  .btn-primary:active {
-    background-color: #402721;
-    border-color: #402721; }
-
 .version {
   color: #F27405;
-  margin: 8px 40px 0 0;
+  margin: 8px 34px 0 0;
   font-style: italic; }
