@@ -58,9 +58,12 @@ class CommitteeController extends Controller {
 					}
 					else
 					{
+						// ensure the person is a member of a resolvable department first
+						if($person->departmentUser[0]->department != null) {
 						// committee made up of college representatives (academic groups)
-						$person->departmentUser[0]->department->load('academicGroup');
-						$memberOf = $person->departmentUser[0]->department->academicGroup->name;
+							$person->departmentUser[0]->department->load('academicGroup');
+							$memberOf = $person->departmentUser[0]->department->academicGroup->name;
+						}
 					}
 				}
 
