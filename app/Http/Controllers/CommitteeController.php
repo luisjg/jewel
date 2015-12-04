@@ -75,7 +75,7 @@ class CommitteeController extends Controller {
 
 				// should there be a link to a Faculty profile?
 				$nameMarkup = $person->common_name;
-				if($position == "chair" || $position == "member") {
+				if(($position == "chair" || $position == "member") && $person->affiliation != "student") {
 					$nameMarkup = "<a href='http://metalab.csun.edu/faculty/profiles/{$person->email_uri}' target='_blank'>$nameMarkup</a>";
 				}
 				else
