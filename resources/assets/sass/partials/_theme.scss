@@ -2,17 +2,25 @@ body{
 	font-family: $font-family-sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: $color-burgandy;
+	background-color: $color-white;
 }
 
-header{
+header {
 	background-color: $color-burgandy;
 	padding: 10px;
-	
-	a{
+	position: fixed;
+	height: 40px;
+	width: 100%;
+	top: 70px;
+	z-index: 9;
+	a {
 		color: #fff;
 	}
 
+}
+
+.wrapper {
+	margin-top: 100px;
 }
 
 .main-banner{

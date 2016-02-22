@@ -28,3 +28,7 @@ Route::group(['prefix' => 'api'], function() {
 
 // legacy route to support /data?department_id=[dept_id]
 Route::get('data', 'DepartmentController@showData');
+
+Route::get('docs', function () {
+    return view('pages.docs');
+});
