@@ -7418,10 +7418,6 @@ header a {
   color: #fff;
 }
 
-.wrapper {
-  margin-top: 100px;
-}
-
 .main-banner {
   padding: 75px 0 150px;
 }
@@ -7465,11 +7461,15 @@ header a {
   z-index: 9;
 }
 
+.docs {
+  margin-top: 100px;
+}
+
 .target:before {
   display: block;
   content: " ";
-  margin-top: -285px;
-  height: 285px;
+  margin-top: -185px;
+  height: 185px;
 }
 
 #sidebar {

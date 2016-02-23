@@ -19,7 +19,7 @@
 
         {{-- APP CONTENT BEGINS --}}
         @include('layouts.partials.header-docs')
-            <div class="wrapper">
+            <div class="wrapper docs">
                 @yield('content')
             </div>
             {{-- MODALS --}}

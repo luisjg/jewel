@@ -13,6 +13,11 @@
 
             {{-- APP STYLESHEETS --}}
         {!! HTML::style('css/app.css') !!}
+        <style>
+            body{
+                background-color: #732002;
+            }
+        </style>
     </head>
     <body>
 
