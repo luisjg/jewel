@@ -31,17 +31,17 @@ class DepartmentController extends Controller {
 	public function showPeople($dept_id)
 	{
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
-		$persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
-			$q->where('department_id', 'academic_departments:'.$dept_id);
-		})
-		// GRAB THE IMAGE
-		->with('image')
-		// ONLY LOAD THE DEPARTMENT REQUESTED (makes using first() ok below)
-		->with(['departmentUser' => function($q) use ($dept_id) {
-			$q->where('department_id', 'academic_departments:'.$dept_id);
-		}])
-		->orderBy('last_name')->orderBy('first_name')
-		->get();
+		// $persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
+		// 	$q->where('department_id', 'academic_departments:'.$dept_id);
+		// })
+		// // GRAB THE IMAGE
+		// ->with('image')
+		// // ONLY LOAD THE DEPARTMENT REQUESTED (makes using first() ok below)
+		// ->with(['departmentUser' => function($q) use ($dept_id) {
+		// 	$q->where('department_id', 'academic_departments:'.$dept_id);
+		// }])
+		// ->orderBy('last_name')->orderBy('first_name')
+		// ->get();
 
 		// Separate Data By Role
 		$roles = [
@@ -54,30 +54,30 @@ class DepartmentController extends Controller {
 		foreach ($persons as $person) {
 
 			// Grab Person Departments
-			$departments = collect($person->departmentUser->all());
+			// $departments = collect($person->departmentUser->all());
 
-			// Check if Person is a Chair
-			$chair = $departments->where('role_name', 'chair')->first();
+			// // Check if Person is a Chair
+			// $chair = $departments->where('role_name', 'chair')->first();
 
-			// Assign Chair and Run the rest of the Department Listing
-			if($chair){
-				$role_name = $chair->role_name;
+			// // Assign Chair and Run the rest of the Department Listing
+			// if($chair){
+			// 	$role_name = $chair->role_name;
 				
-			} else{
-				$role_name = $person->departmentUser->first()->role_name;
+			// } else{
+			// 	$role_name = $person->departmentUser->first()->role_name;
 
-					// Assign Lecturers
-					if($person->rank == 'Lecturer') {
-						$role_name = $person->rank;
-				}
-			}
+			// 		// Assign Lecturers
+			// 		if($person->rank == 'Lecturer') {
+			// 			$role_name = $person->rank;
+			// 	}
+			// }
 			
 			// Grab Faculty Profile Image
-			if(!$person->image){
-				$img = 'imgs/profile-default.png';
-			} else {
-				$img = 'uploads/imgs/'.$person->image->src;
-			}
+			// if(!$person->image){
+			// 	$img = 'imgs/profile-default.png';
+			// } else {
+			// 	$img = 'uploads/imgs/'.$person->image->src;
+			// }
 
 			// Interpolate & Append Markup
 			if (array_key_exists($role_name, $roles)) {
