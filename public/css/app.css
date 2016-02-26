@@ -7376,12 +7376,12 @@ h5 {
 .btn-default:hover, .btn-default:focus, .btn-default:active {
   background-color: #fff;
   border-color: #fff;
-  color: #732002;
+  color: #CF0A2C;
 }
 .btn-default:hover:hover, .btn-default:hover:focus, .btn-default:focus:hover, .btn-default:focus:focus, .btn-default:active:hover, .btn-default:active:focus {
   background-color: #fff;
   border-color: #fff;
-  color: #732002;
+  color: #CF0A2C;
 }
 
 .btn-primary {
@@ -7406,7 +7406,7 @@ body {
 }
 
 header {
-  background-color: #732002;
+  background-color: #CF0A2C;
   padding: 10px;
   position: fixed;
   height: 40px;
@@ -7486,12 +7486,12 @@ header a {
   margin-top: 50px;
 }
 .number-list--type {
-  border: solid 6px #732002;
+  border: solid 6px #CF0A2C;
   padding: 5px 10px;
   border-radius: 100px;
   margin-right: 15px;
   font-weight: 900;
-  color: #732002;
+  color: #CF0A2C;
   font-size: 17px;
 }
 .number-list--title {
@@ -7509,13 +7509,13 @@ header a {
   font-weight: 400;
 }
 .url a {
-  color: #411201;
+  color: #9e0822;
 }
 
 .well {
   width: 80%;
   padding: 20px;
-  border-left: solid 6px #732002;
+  border-left: solid 6px #CF0A2C;
   background: #fff;
   border-radius: 0 5px 5px 0;
 }
