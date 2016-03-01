@@ -1,0 +1,50 @@
+@mixin shadow($shadow-horizontal, $shadow-vertical, $shadow-blur-radius, $shadow-spread-radius, $shadow-color) {
+	-webkit-box-shadow: $shadow-horizontal $shadow-vertical $shadow-blur-radius $shadow-spread-radius $shadow-color;
+	-moz-box-shadow: $shadow-horizontal $shadow-vertical $shadow-blur-radius $shadow-spread-radius $shadow-color;
+	box-shadow: $shadow-horizontal $shadow-vertical $shadow-blur-radius $shadow-spread-radius $shadow-color;
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin custom-button-variant($color, $background, $border, $active-color, $active-background, $active-border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $active-color;
+    background-color: $active-background;
+        border-color: $active-border;
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}

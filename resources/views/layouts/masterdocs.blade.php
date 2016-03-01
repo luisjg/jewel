@@ -13,6 +13,7 @@
 
             {{-- APP STYLESHEETS --}}
         {!! HTML::style('css/app.css') !!}
+        {!! HTML::style('css/font-awesome.css') !!}
         {!! HTML::style('css/prism.css') !!}
     </head>
     <body>

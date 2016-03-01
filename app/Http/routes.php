@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+//Route::get('/', 'WelcomeController@index');
 
 // all API data routes are prefixed with /api
 Route::group(['prefix' => 'api'], function() {
@@ -29,6 +29,6 @@ Route::group(['prefix' => 'api'], function() {
 // legacy route to support /data?department_id=[dept_id]
 Route::get('data', 'DepartmentController@showData');
 
-Route::get('docs', function () {
+Route::get('/', function () {
     return view('pages.docs');
 });
