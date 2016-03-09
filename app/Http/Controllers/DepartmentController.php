@@ -25,7 +25,7 @@ class DepartmentController extends Controller {
 	/**
 	 * Display a listing of the people in the given department.
 	 *
-	 * @param integer $dept_id  The ID of the academic department
+	 * @param integer $dept_id The ID of the academic department
 	 * @return Response
 	 */
 	public function showPeople($dept_id)
@@ -44,7 +44,6 @@ class DepartmentController extends Controller {
 		// ->get();
 
 		// Separate Data By Role
-		
 		$roles = [
 			'chair'=>'',
 			'faculty' =>'',
