@@ -7861,6 +7861,93 @@ address {
   line-height: 1.8;
 }
 
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+.label i {
+  cursor: pointer;
+}
+.label:empty {
+  display: none;
+}
+.btn .label {
+  position: relative;
+  top: -1px;
+}
+
+a.label:hover, a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.label-lg {
+  font-size: 88%;
+  padding: .45em .95em;
+}
+
+.label-default {
+  background-color: gray;
+}
+.label-default[href]:hover, .label-default[href]:focus {
+  background-color: #666666;
+}
+
+.label-primary {
+  background-color: #CF0A2C;
+}
+.label-primary[href]:hover, .label-primary[href]:focus {
+  background-color: #9e0822;
+}
+
+.label-secondary {
+  background-color: #fff;
+}
+.label-secondary[href]:hover, .label-secondary[href]:focus {
+  background-color: #e6e6e6;
+}
+.label-secondary.label {
+  color: inherit;
+  border: 1px solid #ededed;
+}
+
+.label-success {
+  background-color: #5cb85c;
+}
+.label-success[href]:hover, .label-success[href]:focus {
+  background-color: #449d44;
+}
+
+.label-info {
+  background-color: #5bc0de;
+}
+.label-info[href]:hover, .label-info[href]:focus {
+  background-color: #31b0d5;
+}
+
+.label-warning {
+  background-color: #f0ad4e;
+}
+.label-warning[href]:hover, .label-warning[href]:focus {
+  background-color: #ec971f;
+}
+
+.label-danger {
+  background-color: #d9534f;
+}
+.label-danger[href]:hover, .label-danger[href]:focus {
+  background-color: #c9302c;
+}
+
 .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -9373,6 +9460,22 @@ input[type="button"].btn-block {
   border-left: solid 6px #CF0A2C;
   background: #fff;
   border-radius: 0 5px 5px 0;
+}
+
+#sidebar {
+  position: fixed;
+  overflow-y: scroll;
+  width: 300px;
+}
+#sidebar li {
+  list-style: none;
+}
+#sidebar .active {
+  text-decoration: underline;
+}
+
+.docs-content {
+  margin-left: 300px;
 }
 
 .input-group {

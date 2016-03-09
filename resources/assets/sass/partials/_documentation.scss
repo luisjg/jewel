@@ -93,3 +93,21 @@
     background: $color-white;
     border-radius: 0 5px 5px 0;
 }
+
+#sidebar {
+  position: fixed;
+  overflow-y: scroll;
+  width: 300px;
+
+  li {
+    list-style: none;
+  }
+
+  .active {
+    text-decoration: underline;
+  }
+}
+
+.docs-content{
+  margin-left:300px;
+}

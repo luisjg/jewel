@@ -15,6 +15,8 @@
         {!! HTML::style('css/app.css') !!}
         {!! HTML::style('css/font-awesome.css') !!}
         {!! HTML::style('css/prism.css') !!}
+        {{-- APP SCRIPTS --}}
+        {!! HTML::script('js/app.js') !!}
     </head>
     <body>
 
@@ -29,7 +31,6 @@
         {{-- APP CONTENT ENDS --}}
         
         {{-- APP SCRIPTS --}}
-        {!! HTML::script('js/app.js') !!}
         {!! HTML::script('js/prism.js') !!}
     </body>
 </html>
