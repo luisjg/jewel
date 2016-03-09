@@ -23,7 +23,7 @@
 					<div class="collapse navbar-collapse navbar-ex1-collapse">
 						<ul class="nav navbar-nav navbar-center">
 							<li><a href="{{url('/')}}">Home</a></li>
-							<li class=""><a href="{{url('/')}}">About</a></li>
+							<li class=""><a href="{{url('/documentation')}}">Documentation</a></li>
 							<li class=""><a href="{{url('/')}}">Stories</a></li>
 							<li class=""><a href="{{url('/')}}">Research</a></li>
 							<li class=""><a href="{{url('/')}}">Find Faculty</a></li>
