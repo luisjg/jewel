@@ -31,23 +31,23 @@ class DepartmentController extends Controller {
 	public function showPeople($dept_id)
 	{
 
-		// GET Deparmtent from directory
+		// GETS ALL THE MEMBERS OF AN ACADEMIC DEPARTMENT FROM DIRECTORY
 		try {
 			$client = new \GuzzleHttp\Client();
 
 			$response = $client->get("https://directory-demo.sandbox.csun.edu/academic_departments/{$dept_id}/members/full");
 			$people = $response->json();
+			// $people = $people['person'];
 		}
 		catch(\Exception $e)
 		{
 			$people = [
-				// WE NEED A BETTER WAY OF HANDLING THIS W/ CURRICULUM
+				// WE NEED A BETTER WAY OF HANDLING THIS
 				"status" => "503",
 				"success" => "false",
 				"classes" => []
 			];
 		}
-		return $people;
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
 		// $persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
 		// 	$q->where('department_id', 'academic_departments:'.$dept_id);
@@ -68,28 +68,43 @@ class DepartmentController extends Controller {
 			'Lecturer'=>'',
 			'emeritus'=>''
 		];
-		
-		foreach ($persons as $person) {
+		echo '<ul>';
+		foreach ($people as $person => $value) {
+			foreach ($value['department_user'] as $department_user => $rank) {
+				 echo '<li>'.$rank['role_name'].'</li>';
+			}
+			echo '</ul>';
+			// dd($value['department_user']);
 
 			// Grab Person Departments
 			// $departments = collect($person->departmentUser->all());
 
-			// // Check if Person is a Chair
-			// $chair = $departments->where('role_name', 'chair')->first();
+			// Check if Person is a Chair
+		
+			// $chair = $person['role_name'=> 'chair']->first();
 
-			// // Assign Chair and Run the rest of the Department Listing
-			// if($chair){
-			// 	$role_name = $chair->role_name;
+			// Assign Chair and Run the rest of the Department Listing
+		// 	if($chair){
+		// 		$role_name = $chair->role_name;
 				
-			// } else{
-			// 	$role_name = $person->departmentUser->first()->role_name;
+		// 	} else{
+		// 		$rank = $person->first()->rank;
 
-			// 		// Assign Lecturers
-			// 		if($person->rank == 'Lecturer') {
-			// 			$role_name = $person->rank;
-			// 	}
-			// }
-			
+		// 			// Assign Lecturers
+		// 			if($person->rank == 'Lecturer') {
+		// 				$rank= $person->rank;
+		// 		}
+		// 		else{
+		// 		$rank = $person->first()->rank;
+
+		// 			// Assign Professor
+		// 			if($person->rank == 'Professor') {
+		// 				$rank= $person->rank;
+		// 		}
+		// 	}
+		
+		// }
+	}
 			// Grab Faculty Profile Image
 			// if(!$person->image){
 			// 	$img = 'imgs/profile-default.png';
@@ -98,75 +113,75 @@ class DepartmentController extends Controller {
 			// }
 
 			// Interpolate & Append Markup
-			if (array_key_exists($role_name, $roles)) {
-				$roles[$role_name] .= "
-				<div class='jewel-media'>
-					<div class='jewel-media-left'>
-						<img class='jewel-img' src='https://www.metalab.csun.edu/faculty/{$img}' alt='Image of {$person->display_name}'>
-					</div>
-					<div class='jewel-media-body'>
-						<ul class='jewel'>
-							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
-							<li class='jewel-role-name'>{$person->rank}</li>
-							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
-							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
-						</ul>
-					</div>
-				</div>
-				";
-			}
+			// if (array_key_exists($role_name, $roles)) {
+			// 	$roles[$role_name] .= "
+			// 	<div class='jewel-media'>
+			// 		<div class='jewel-media-left'>
+			// 			<img class='jewel-img' src='https://www.metalab.csun.edu/faculty/{$img}' alt='Image of {$person->display_name}'>
+			// 		</div>
+			// 		<div class='jewel-media-body'>
+			// 			<ul class='jewel'>
+			// 				<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
+			// 				<li class='jewel-role-name'>{$person->rank}</li>
+			// 				<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
+			// 				<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+			// 			</ul>
+			// 		</div>
+			// 	</div>
+			// 	";
+			// }
 		}
 
-		// Build Department Listing
-		$deptList = "
-		<style> 
-			.jewel-media{
-				margin: 25px 0;
-			}
-			.jewel-media-left{
-			    display: table-cell;
-    			vertical-align: middle;
-			}
-			.jewel-media-body{
-				display: table-cell;
-    			vertical-align: middle;
-    			width: 500px;
-			}
-			.jewel-url a{
-				color: #CF0A2C;
-			}
-			.jewel-img {
-				float: left;
-				max-width: 150px;
-				display: block;
-				vertical-align: middle;
-			}
-			.jewel-role-name{
-				font-size: 1.15em;
-			}
-			.jewel-display-name{
-				color: #4a4a4a;
-			    font-size: 1.4em;
-    			margin: 5px 0;
-			}
-			.jewel{
-				color: #4a4a4a;
-				list-style:outside none;
-				clear: both;
-			}
-		</style> 
-		";
+		// // Build Department Listing
+		// $deptList = "
+		// <style> 
+		// 	.jewel-media{
+		// 		margin: 25px 0;
+		// 	}
+		// 	.jewel-media-left{
+		// 	    display: table-cell;
+  //   			vertical-align: middle;
+		// 	}
+		// 	.jewel-media-body{
+		// 		display: table-cell;
+  //   			vertical-align: middle;
+  //   			width: 500px;
+		// 	}
+		// 	.jewel-url a{
+		// 		color: #CF0A2C;
+		// 	}
+		// 	.jewel-img {
+		// 		float: left;
+		// 		max-width: 150px;
+		// 		display: block;
+		// 		vertical-align: middle;
+		// 	}
+		// 	.jewel-role-name{
+		// 		font-size: 1.15em;
+		// 	}
+		// 	.jewel-display-name{
+		// 		color: #4a4a4a;
+		// 	    font-size: 1.4em;
+  //   			margin: 5px 0;
+		// 	}
+		// 	.jewel{
+		// 		color: #4a4a4a;
+		// 		list-style:outside none;
+		// 		clear: both;
+		// 	}
+		// </style> 
+		// ";
 
-		foreach ($roles as $role => $data) {
-			$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
-		}
+		// foreach ($roles as $role => $data) {
+		// 	$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
+		// }
 
-		// remove control characters from the output
-		$deptList = HandlerUtilities::removeControlCharacters($deptList);
+		// // remove control characters from the output
+		// $deptList = HandlerUtilities::removeControlCharacters($deptList);
 
-		// send the response
-		return $this->sendResponse($deptList);
-	}
+		// // send the response
+		// return $this->sendResponse($deptList);
+	// }
 
 	/**
 	 * Show the form for creating a new resource.
