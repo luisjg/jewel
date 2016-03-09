@@ -5,25 +5,25 @@
 @section('content')
 	<div class="container">
 		<div id="sidebar" class="col-md-3 col-sm-12">
-			<?php $i = 0; ?>
-			<a href="firstHeading" class="h5 item item-<?php echo $i; ?>">Menu Item</a><?php $i++; ?>
+		
+			<a href="#firstHeading" class="h5 item item-1">Menu Item 1</a>
 			<ul>
-				<li><a href="#firstMenuItem" class="item item-<?php echo $i; ?>">Submenu Item</a><?php $i++; ?></li>
-				<li><a href="#secMenuItem" class="item item-<?php echo $i; ?>">Submenu Item</a><?php $i++; ?></li>
+				<li><a href="#firstMenuItem" class="item item-2">Submenu Item 1.1</a></li>
+				<li><a href="#secMenuItem" class="item item-3">Submenu Item 1.2</a></li>
 			</ul>
-			<a href="secHeading" class="h5 item item-<?php echo $i; ?>">Menu Item</a><?php $i++; ?>
+			<a href="#secHeading" class="h5 item item-4">Menu Item 2</a>
 			<ul>
-				<li><a href="#thirdMenuItem" class="item item-<?php echo $i; ?>">Submenu Item</a><?php $i++; ?></li>
-				<li><a href="#fourthMenuItem" class="item item-<?php echo $i; ?>">Submenu Item</a><?php $i++; ?></li>
+				<li><a href="#thirdMenuItem" class="item item-5">Submenu Item 2.1</a></li>
+				<li><a href="#fourthMenuItem" class="item item-6">Submenu Item 2.2</a></li>
 			</ul>
 		</div>
 		<div class="docs-content col-md-9 col-sm-12">
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header" id="firstHeading">Menu Item</h2>
+					<h2 class="page-header" id="firstHeading">Menu Item 1</h2>
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
 
-					<h3 id="firstMenuItem">Submenu Item 1</h3>
+					<h3 id="firstMenuItem">Submenu Item 1.1</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -39,7 +39,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="secMenuItem">Submenu Item 2</h3>
+					<h3 id="secMenuItem">Submenu Item 1.2</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
@@ -59,10 +59,10 @@
 			</div>
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header" id="secHeading">Menu Item</h2>
+					<h2 class="page-header" id="secHeading">Menu Item 2</h2>
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
 
-					<h3 id="thirdMenuItem">Submenu Item 1</h3>
+					<h3 id="thirdMenuItem">Submenu Item 2.1</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -78,7 +78,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="fourthMenuItem">Submenu Item 2</h3>
+					<h3 id="fourthMenuItem">Submenu Item 2.2</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
