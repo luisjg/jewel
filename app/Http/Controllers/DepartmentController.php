@@ -30,6 +30,24 @@ class DepartmentController extends Controller {
 	 */
 	public function showPeople($dept_id)
 	{
+
+		// GET Deparmtent from directory
+		try {
+			$client = new \GuzzleHttp\Client();
+
+			$response = $client->get("https://directory-demo.sandbox.csun.edu/academic_departments/{$dept_id}/members/full");
+			$people = $response->json();
+		}
+		catch(\Exception $e)
+		{
+			$people = [
+				// WE NEED A BETTER WAY OF HANDLING THIS W/ CURRICULUM
+				"status" => "503",
+				"success" => "false",
+				"classes" => []
+			];
+		}
+		return $people;
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
 		// $persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
 		// 	$q->where('department_id', 'academic_departments:'.$dept_id);
