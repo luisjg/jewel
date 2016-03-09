@@ -9465,7 +9465,6 @@ input[type="button"].btn-block {
 #sidebar {
   position: fixed;
   overflow-y: scroll;
-  width: 300px;
 }
 #sidebar li {
   list-style: none;
@@ -9474,10 +9473,16 @@ input[type="button"].btn-block {
   text-decoration: underline;
 }
 
-.docs-content {
-  margin-left: 300px;
+@media (min-width: 768px) {
+  .docs-content {
+    margin-left: 25%;
+  }
 }
-
+@media (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+}
 .input-group {
   position: relative;
   display: table;

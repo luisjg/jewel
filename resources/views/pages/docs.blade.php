@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="container">
-		<div id="sidebar">
+		<div id="sidebar" class="col-md-3 col-sm-12">
 			<?php $i = 0; ?>
 			<a href="firstHeading" class="h5 item item-<?php echo $i; ?>">Menu Item</a><?php $i++; ?>
 			<ul>
@@ -17,7 +17,7 @@
 				<li><a href="#fourthMenuItem" class="item item-<?php echo $i; ?>">Submenu Item</a><?php $i++; ?></li>
 			</ul>
 		</div>
-		<div class="docs-content">
+		<div class="docs-content col-md-9 col-sm-12">
 			<div class="types">
 				<div class="col-sm-12">
 					<h2 class="page-header" id="firstHeading">Menu Item</h2>
