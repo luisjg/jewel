@@ -73,7 +73,7 @@ class DepartmentController extends Controller {
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
 				if ($rank['role_name']=='chair'){
-					$chair = array('name' => $value['display_name'], 'rank'=> $rank['role_display'], 'email' => $value['email']);
+					$chair = array('name' => $value['display_name'], 'rank'=> $rank['role_display'], 'email' => $value['email'], 'image'=> $value['image']);
 					// return $chair;
 				}
 			}
