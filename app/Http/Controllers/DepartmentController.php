@@ -68,12 +68,23 @@ class DepartmentController extends Controller {
 			'Lecturer'=>'',
 			'emeritus'=>''
 		];
-		echo '<ul>';
+		//Get Department Chair
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
-				 echo '<li>'.$rank['role_name'].'</li>';
+				if ($rank['role_name']=='chair'){
+					$chair = $value;
+					return $chair;
+				}
 			}
-			echo '</ul>';
+		}
+
+		// foreach ($people as $person => $value) {
+		// 	if ($rank['rank']=='Lecturer'){
+		// 		$Lecturer = $value;
+		// 		return $Lecturer;
+		// 	}
+		// }
+
 			// dd($value['department_user']);
 
 			// Grab Person Departments
@@ -104,7 +115,7 @@ class DepartmentController extends Controller {
 		// 	}
 		
 		// }
-	}
+		
 			// Grab Faculty Profile Image
 			// if(!$person->image){
 			// 	$img = 'imgs/profile-default.png';
