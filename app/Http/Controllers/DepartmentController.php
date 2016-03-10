@@ -65,6 +65,7 @@ class DepartmentController extends Controller {
 		$roles = [
 			'chair'=>'',
 			'faculty' =>'',
+			'professor' =>'',
 			'Lecturer'=>'',
 			'emeritus'=>''
 		];
@@ -77,6 +78,21 @@ class DepartmentController extends Controller {
 				}
 			}
 		}
+
+		//Get Department Professors
+		foreach ($people as $person => $value) {
+			if ($value['rank']=='Professor'){
+				$professor = $value;
+				return $professor;
+			}
+		}
+		// //Get Department Lecturers
+		foreach ($people as $person => $value) {
+			if ($value['rank']=='Lecturer'){
+				$lecturer = $value;
+				return $lecturer;
+			}
+		}	
 
 		// foreach ($people as $person => $value) {
 		// 	if ($rank['rank']=='Lecturer'){
