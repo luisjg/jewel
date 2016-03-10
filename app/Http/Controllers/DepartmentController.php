@@ -164,8 +164,30 @@ class DepartmentController extends Controller {
 			// 	";
 			// }
 
+		
+				echo "<div class='jewel-media'>";
+					echo "<div class='jewel-media-body'>";
+						echo "<ul class='jewel'>";
+							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$chair[name]</h3></li>";
+							echo "<li class='jewel-role-name'>$chair[rank]</li>";
+							echo "<li class='jewel-email'><strong>Email: $chair[email]</li>";
+						echo '</ul>';
+					echo '</div>';
+
 			
-				foreach ($professor as $key) {
+			foreach ($professor as $key) {
+				echo "<div class='jewel-media'>";
+					echo "<div class='jewel-media-body'>";
+						echo "<ul class='jewel'>";
+							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
+							echo "<li class='jewel-role-name'>$key[rank]</li>";
+							echo "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
+						echo '</ul>';
+					echo '</div>';
+				echo '</div>';
+			}
+
+			foreach ($lecturer as $key) {
 				echo "<div class='jewel-media'>";
 					echo "<div class='jewel-media-body'>";
 						echo "<ul class='jewel'>";
