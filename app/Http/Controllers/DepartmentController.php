@@ -98,7 +98,7 @@ class DepartmentController extends Controller {
 
 		$example[] = array($chair, $professor, $lecturer);
 		
-	dd($lecturer);	
+	// dd($lecturer);	
 
 		// foreach ($people as $person => $value) {
 		// 	if ($rank['rank']=='Lecturer'){
@@ -165,17 +165,17 @@ class DepartmentController extends Controller {
 			// }
 
 			
-			// 	foreach ($chair as $key) {
-			// 	echo "<div class='jewel-media'>";
-			// 		echo "<div class='jewel-media-body'>";
-			// 			echo "<ul class='jewel'>";
-			// 				echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key</h3></li>";
-			// 				echo "<li class='jewel-role-name'>$key</li>";
-			// 				echo "<li class='jewel-email'><strong>Email: </strong><a href='mailto:$key'>{$person->email}</a></li>";
-			// 			echo '</ul>';
-			// 		echo '</div>';
-			// 	echo '</div>';
-			// }
+				foreach ($professor as $key) {
+				echo "<div class='jewel-media'>";
+					echo "<div class='jewel-media-body'>";
+						echo "<ul class='jewel'>";
+							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
+							echo "<li class='jewel-role-name'>$key[rank]</li>";
+							echo "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
+						echo '</ul>';
+					echo '</div>';
+				echo '</div>';
+			}
 		
 		}
 
