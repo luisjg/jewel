@@ -78,7 +78,7 @@ class DepartmentController extends Controller {
 				}
 			}
 		}
-		dd($chair);
+		// dd($chair);
 		//Get Department Professors
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Professor'){
@@ -95,7 +95,10 @@ class DepartmentController extends Controller {
 				// return $lecturer;
 			}
 		}
-		// dd($lecturer);	
+
+		$example[] = array($chair, $professor, $lecturer);
+		
+	dd($lecturer);	
 
 		// foreach ($people as $person => $value) {
 		// 	if ($rank['rank']=='Lecturer'){
@@ -160,6 +163,20 @@ class DepartmentController extends Controller {
 			// 	</div>
 			// 	";
 			// }
+
+			
+			// 	foreach ($chair as $key) {
+			// 	echo "<div class='jewel-media'>";
+			// 		echo "<div class='jewel-media-body'>";
+			// 			echo "<ul class='jewel'>";
+			// 				echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key</h3></li>";
+			// 				echo "<li class='jewel-role-name'>$key</li>";
+			// 				echo "<li class='jewel-email'><strong>Email: </strong><a href='mailto:$key'>{$person->email}</a></li>";
+			// 			echo '</ul>';
+			// 		echo '</div>';
+			// 	echo '</div>';
+			// }
+		
 		}
 
 		// // Build Department Listing
