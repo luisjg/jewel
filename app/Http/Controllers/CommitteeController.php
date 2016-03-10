@@ -18,6 +18,25 @@ class CommitteeController extends Controller {
 	 * @return Response
 	 */
 	public function showPeople($committee_id) {
+
+		// GET ALL MEMBERS IN A COMMITTEE
+		try {
+			$client = new \GuzzleHttp\Client();
+
+			$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
+			$members = $response->json();
+		}
+		catch(\Exception $e)
+		{
+			$members = [
+				// WE NEED A BETTER WAY OF HANDLING THIS
+				"status" => "503",
+				"success" => "false",
+				"members" => []
+			];
+		}
+		return $members;
+
 		// grab the committee with its associated people (ordered by their names)
 		// $committee = Committee::with(['people' => function($q) {
 		// 	$q->orderBy('last_name')->orderBy('first_name');

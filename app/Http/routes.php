@@ -17,7 +17,7 @@ Route::get('/', 'WelcomeController@index');
 Route::group(['prefix' => 'api'], function() {
 
 	// academic department information
-	// Example: /api/departments/189/people
+	// Example: /api/dempartments/189/people
 	Route::get('departments/{dept_id}/people', 'DepartmentController@showPeople');
 
 	// committee information
