@@ -73,26 +73,29 @@ class DepartmentController extends Controller {
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
 				if ($rank['role_name']=='chair'){
-					$chair = $value;
-					return $chair;
+					$chair = array('name' => $value['display_name'], 'rank'=> $rank['role_display'], 'email' => $value['email']);
+					// return $chair;
 				}
 			}
 		}
-
+		dd($chair);
 		//Get Department Professors
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Professor'){
-				$professor = $value;
-				return $professor;
+				$professor[] = array('name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email']);
+				// return $professor;
 			}
 		}
+		// dd($professor);
+		
 		// //Get Department Lecturers
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Lecturer'){
-				$lecturer = $value;
-				return $lecturer;
+				$lecturer[] = array('name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email']);
+				// return $lecturer;
 			}
-		}	
+		}
+		// dd($lecturer);	
 
 		// foreach ($people as $person => $value) {
 		// 	if ($rank['rank']=='Lecturer'){
