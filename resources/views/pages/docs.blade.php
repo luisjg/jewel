@@ -20,10 +20,10 @@
 		<div class="docs-content col-md-9 col-sm-12">
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header item-1" id="firstHeading">Menu Item 1</h2>
+					<h2 class="page-header" id="firstHeading">Menu Item 1</h2>
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
 
-					<h3 id="firstMenuItem" class="item-2">Submenu Item 1.1</h3>
+					<h3 id="firstMenuItem">Submenu Item 1.1</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -39,7 +39,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="secMenuItem" class="item-3">Submenu Item 1.2</h3>
+					<h3 id="secMenuItem">Submenu Item 1.2</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
@@ -59,10 +59,10 @@
 			</div>
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header item-4" id="secHeading">Menu Item 2</h2>
+					<h2 class="page-header" id="secHeading">Menu Item 2</h2>
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
 
-					<h3 id="thirdMenuItem" class="item-5">Submenu Item 2.1</h3>
+					<h3 id="thirdMenuItem">Submenu Item 2.1</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -78,7 +78,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="fourthMenuItem" class="item-6">Submenu Item 2.2</h3>
+					<h3 id="fourthMenuItem">Submenu Item 2.2</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
