@@ -6,24 +6,28 @@
 	<div class="container">
 		<div id="sidebar" class="col-md-3 col-sm-12">
 		
-			<a href="#firstHeading" class="h5 item item-1">Menu Item 1</a>
+			<a href="#firstHeading" class="h5 item item-1">Departments</a>
 			<ul>
-				<li><a href="#firstMenuItem" class="item item-2">Submenu Item 1.1</a></li>
-				<li><a href="#secMenuItem" class="item item-3">Submenu Item 1.2</a></li>
+				<li><a href="#firstMenuItem" class="item item-2">URL</a></li>
+				<li><a href="#secMenuItem" class="item item-3">Example</a></li>
 			</ul>
-			<a href="#secHeading" class="h5 item item-4">Menu Item 2</a>
+			<a href="#secHeading" class="h5 item item-4">Committees</a>
 			<ul>
-				<li><a href="#thirdMenuItem" class="item item-5">Submenu Item 2.1</a></li>
-				<li><a href="#fourthMenuItem" class="item item-6">Submenu Item 2.2</a></li>
+				<li><a href="#thirdMenuItem" class="item item-5">URLs</a></li>
+				<li><a href="#fourthMenuItem" class="item item-6">Example</a></li>
 			</ul>
 		</div>
 		<div class="docs-content col-md-9 col-sm-12">
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header" id="firstHeading">Menu Item 1</h2>
+					<h2 class="page-header" id="firstHeading">Departments</h2>
+					
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
+					
+					<h3 id="firstMenuItem">URL</h3>
+					<p class="url"><a href="{{url('/api/departments/189/people')}}">https://jewel.ptg.csun.edu/api/departments/189/people</a></p>
 
-					<h3 id="firstMenuItem">Submenu Item 1.1</h3>
+					<h3>Example</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -39,7 +43,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="secMenuItem">Submenu Item 1.2</h3>
+					<h3 id="secMenuItem">Example</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
@@ -59,10 +63,15 @@
 			</div>
 			<div class="types">
 				<div class="col-sm-12">
-					<h2 class="page-header" id="secHeading">Menu Item 2</h2>
+					<h2 class="page-header" id="secHeading">Committees</h2>
+					
 					<p><span class="label label-lg label-secondary">$code</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam hic vitae doloremque sunt, officia expedita, sequi, eveniet eligendi vel debitis corrupti dolor cumque aliquid quas, nostrum necessitatibus soluta id nulla!</p>
 
-					<h3 id="thirdMenuItem">Submenu Item 2.1</h3>
+					<h3 id="thirdMenuItem">URL</h3>
+					<p class="url"><a class="url" href="{{url('/api/committees/atc/people')}}">https://jewel.ptg.csun.edu/api/committees/atc/people</a></p>
+					<p class="url"><a class="url" href="{{url('/api/committees/aggab/people')}}">https://jewel.ptg.csun.edu/api/committees/aggab/people</a></p>
+
+					<h3>Example</h3>
 					<ul>
 						<li>Type: Boolean</li>
 						<li>Default: false</li>
@@ -78,7 +87,7 @@
 						<p>	The subcollection URI allows the consumer to obtain a list of courses or classes that are
 		either part of a single program or Class Name.</p>
 					</div> 
-					<h3 id="fourthMenuItem">Submenu Item 2.2</h3>
+					<h3 id="fourthMenuItem">Example</h3>
 					<ul>
 						<li>Arguments</li>
 						<ul>
@@ -87,13 +96,13 @@
 						<li>
 							Usage:
 							<p>Aspernatur id, nihil aperiam ducimus sed praesentium magni inventore a eligendi, fugiat nisi possimus in provident, aliquid <span class="label label-lg label-secondary">quis</span> temporibus, animi! Quasi, labore.</p>
-							<pre class="language-html">
-								<code class="language-html">
-									<span class="token tag"><span class="token punctuation">&lt;</span>div id="mount-point"<span class="token punctuation">&gt;</span><span class="token punctuation">&lt;</span>/div<span class="token punctuation">&gt;</span></span>
-								</code>
-							</pre>
 						</li>
 					</ul>
+					<pre class="language-html">
+						<code class="language-html">
+							<span class="token tag"><span class="token punctuation">&lt;</span>div id="mount-point"<span class="token punctuation">&gt;</span><span class="token punctuation">&lt;</span>/div<span class="token punctuation">&gt;</span></span>
+						</code>
+					</pre>	
 				</div>
 			</div>
 		</div>

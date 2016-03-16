@@ -22,13 +22,8 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse navbar-ex1-collapse">
 						<ul class="nav navbar-nav navbar-center">
-							<li><a href="{{url('/')}}">Home</a></li>
-							<li class=""><a href="{{url('/documentation')}}">Documentation</a></li>
-							<li class=""><a href="{{url('/')}}">Stories</a></li>
-							<li class=""><a href="{{url('/')}}">Research</a></li>
-							<li class=""><a href="{{url('/')}}">Find Faculty</a></li>
-							<li class=""><a href="{{url('/')}}">Login</a></li>
-													</ul>
+							
+						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div>
 			</div>

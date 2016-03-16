@@ -11,7 +11,7 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index');
 
 // all API data routes are prefixed with /api
 Route::group(['prefix' => 'api'], function() {
