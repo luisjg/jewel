@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="container">
-		<div id="sidebar" class="col-md-3 col-sm-12">
+		<div id="sidebar" class="col-md-2 col-sm-12">
 			<div class="side-menu">
 				<a href="#firstHeading" class="h5 item item-1">Departments</a>
 				<ul>
@@ -18,7 +18,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="docs-content col-md-9 col-sm-12">
+		<div class="docs-content col-md-10 col-sm-12">
 			<div class="types">
 				<div class="col-sm-12">
 					<h2 class="page-header" id="firstHeading">Departments</h2>
