@@ -5,17 +5,18 @@
 @section('content')
 	<div class="container">
 		<div id="sidebar" class="col-md-3 col-sm-12">
-		
-			<a href="#firstHeading" class="h5 item item-1">Departments</a>
-			<ul>
-				<li><a href="#firstMenuItem" class="item item-2">URL</a></li>
-				<li><a href="#secMenuItem" class="item item-3">Example</a></li>
-			</ul>
-			<a href="#secHeading" class="h5 item item-4">Committees</a>
-			<ul>
-				<li><a href="#thirdMenuItem" class="item item-5">URLs</a></li>
-				<li><a href="#fourthMenuItem" class="item item-6">Example</a></li>
-			</ul>
+			<div class="side-menu">
+				<a href="#firstHeading" class="h5 item item-1">Departments</a>
+				<ul>
+					<li><a href="#firstMenuItem" class="item item-2">URL</a></li>
+					<li><a href="#secMenuItem" class="item item-3">Example</a></li>
+				</ul>
+				<a href="#secHeading" class="h5 item item-4">Committees</a>
+				<ul>
+					<li><a href="#thirdMenuItem" class="item item-5">URLs</a></li>
+					<li><a href="#fourthMenuItem" class="item item-6">Example</a></li>
+				</ul>
+			</div>
 		</div>
 		<div class="docs-content col-md-9 col-sm-12">
 			<div class="types">
