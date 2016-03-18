@@ -62,18 +62,20 @@ class DepartmentController extends Controller {
 		// ->get();
 
 		// Separate Data By Role
-		$roles = [
-			'chair'=>'',
-			'faculty' =>'',
-			'professor' =>'',
-			'Lecturer'=>'',
-			'emeritus'=>''
-		];
+		// $roles = [
+		// 	'chair'=>'',
+		// 	'faculty' =>'',
+		// 	'professor' =>'',
+		// 	'Lecturer'=>'',
+		// 	'emeritus'=>''
+		// ];
+
+
 		//Get Department Chair
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
 				if ($rank['role_name']=='chair'){
-					$chair = array('name' => $value['display_name'], 'rank'=> $rank['role_display'], 'email' => $value['email'], 'image'=> $value['image']);
+					$chair[] = array('type' => 'chair', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 					// return $chair;
 				}
 			}
@@ -82,7 +84,7 @@ class DepartmentController extends Controller {
 		//Get Department Professors
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Professor'){
-				$professor[] = array('name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email']);
+				$professor[] = array('type' => 'faculty', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 				// return $professor;
 			}
 		}
@@ -91,12 +93,35 @@ class DepartmentController extends Controller {
 		// //Get Department Lecturers
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Lecturer'){
-				$lecturer[] = array('name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email']);
+				$lecturer[] = array('type' => 'lecturer', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 				// return $lecturer;
 			}
 		}
 
-		$example[] = array($chair, $professor, $lecturer);
+		foreach ($people as $person => $value) {
+			if ($value['affiliation']=='emeritus'){
+				$emeritus[] = array('type' => 'emiritus', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
+				// return $lecturer;
+			}
+		}
+
+		if (!isset($chair)) {
+            $chair = array();
+        }
+        if (!isset($professor)) {
+            $professor = array();
+        }
+        if (!isset($lecturer)) {
+            $lecturer = array();
+        }
+        if (!isset($emeritus)) {
+            $emeritus = array();
+        }
+   
+
+        $result = array_merge($chair, $professor, $lecturer, $emeritus);
+
+
 		
 	// dd($lecturer);	
 
@@ -164,93 +189,140 @@ class DepartmentController extends Controller {
 			// 	";
 			// }
 
-		
-				echo "<div class='jewel-media'>";
-					echo "<div class='jewel-media-body'>";
-						echo "<ul class='jewel'>";
-							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$chair[name]</h3></li>";
-							echo "<li class='jewel-role-name'>$chair[rank]</li>";
-							echo "<li class='jewel-email'><strong>Email: $chair[email]</li>";
-						echo '</ul>';
-					echo '</div>';
+				//faculty/imgs/profile-default.png
+
+
+
+
+			$output="";
+        	$rank = "";
+
+        	        
+        	        $first = 0;
+        	        $username ="";
+        	      
+        	         foreach ($result as $key) {
+        	         	$exploded = explode('@',$key['email']);
+        	         	$username = $exploded[0];
+
+        	             if($rank != $key['type'] && $first++){
+        	                 $output .= '<hr />';
+        	             }
+        	             $output .= "<div class='jewel-media'>";
+        	                   $output .= "<div class='jewel-media-body'>";
+
+        	                   	if($rank != $key['type']){
+        	                   	    $output .= '<h2>'.$key['type'].'</h2>';
+        	                   	}
+
+        	                   $output .=  "<div class='jewel-media-left'>";
+        	                   		$output .= "<img class='jewel-img' src='https://www.csun.edu/faculty/uploads/imgs/{$key['image']}' alt='Image of {$key['name']}'>";
+        	              			$output .= "</div>";
+        	                       $output .= "<ul class='jewel'>";
+        	                           $output .= "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$key['name']}</h3></li>";
+        	                           $output .= "<li class='jewel-role-name'>{$key['rank']}</li>";
+        	                           $output .= "<li class='jewel-email'><strong>Email: </strong><a href='mailto:".$key['email']."'>".$key['email']."</a></li>";
+        	                          $output .= "<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$username}'>View Profile</a></li>";
+        	                       $output .= '</ul>';
+        	                   $output .= '</div>';
+        	               $output .= '</div>';
+
+        	              $rank = $key['type'];
+        	         }
+
+
+			// 	foreach ($professor as $key) {
+			// 	$output .= "<div class='jewel-media'>";
+			// 		$output .= "<div class='jewel-media-body'>";
+			// 				$output .=  "<div class='jewel-media-left'>";
+			// 					$output .= "<img class='jewel-img' src='https://www.csun.edu/faculty/uploads/imgs/{$chair['image']}' alt='Image of {$chair['name']}'>";
+			// 				$output .= "</div>";
+			// 			$output .= "<ul class='jewel'>";
+			// 				$output .= "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$chair[name]</h3></li>";
+			// 				$output .= "<li class='jewel-role-name'>$chair[rank]</li>";
+			// 				$output .= "<li class='jewel-email'><strong>Email: $chair[email]</li>";
+			// 			$output .= '</ul>';
+			// 		$output .= '</div>';
+			// 	}	
 
 			
-			foreach ($professor as $key) {
-				echo "<div class='jewel-media'>";
-					echo "<div class='jewel-media-body'>";
-						echo "<ul class='jewel'>";
-							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
-							echo "<li class='jewel-role-name'>$key[rank]</li>";
-							echo "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
-						echo '</ul>';
-					echo '</div>';
-				echo '</div>';
-			}
+			// foreach ($professor as $key) {
+			// 	$output .= "<div class='jewel-media'>";
+			// 		$output .= "<div class='jewel-media-body'>";
+			// 			$output .= "<ul class='jewel'>";
+			// 				$output .= "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
+			// 				$output .= "<li class='jewel-role-name'>$key[rank]</li>";
+			// 				$output .= "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
+			// 			$output .= '</ul>';
+			// 		$output .= '</div>';
+			// 	$output .= '</div>';
+			// }
 
-			foreach ($lecturer as $key) {
-				echo "<div class='jewel-media'>";
-					echo "<div class='jewel-media-body'>";
-						echo "<ul class='jewel'>";
-							echo "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
-							echo "<li class='jewel-role-name'>$key[rank]</li>";
-							echo "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
-						echo '</ul>';
-					echo '</div>';
-				echo '</div>';
-			}
+			// foreach ($lecturer as $key) {
+			// 	$output .= "<div class='jewel-media'>";
+			// 		$output .= "<div class='jewel-media-body'>";
+			// 			$output .= "<ul class='jewel'>";
+			// 				$output .= "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>$key[name]</h3></li>";
+			// 				$output .= "<li class='jewel-role-name'>$key[rank]</li>";
+			// 				$output .= "<li class='jewel-email'><strong>Email: </strong>$key[email]</li>";
+			// 			$output .= '</ul>';
+			// 		$output .= '</div>';
+			// 	$output .= '</div>';
+			// }
 		
-		}
 
-		// // Build Department Listing
-		// $deptList = "
-		// <style> 
-		// 	.jewel-media{
-		// 		margin: 25px 0;
-		// 	}
-		// 	.jewel-media-left{
-		// 	    display: table-cell;
-  //   			vertical-align: middle;
-		// 	}
-		// 	.jewel-media-body{
-		// 		display: table-cell;
-  //   			vertical-align: middle;
-  //   			width: 500px;
-		// 	}
-		// 	.jewel-url a{
-		// 		color: #CF0A2C;
-		// 	}
-		// 	.jewel-img {
-		// 		float: left;
-		// 		max-width: 150px;
-		// 		display: block;
-		// 		vertical-align: middle;
-		// 	}
-		// 	.jewel-role-name{
-		// 		font-size: 1.15em;
-		// 	}
-		// 	.jewel-display-name{
-		// 		color: #4a4a4a;
-		// 	    font-size: 1.4em;
-  //   			margin: 5px 0;
-		// 	}
-		// 	.jewel{
-		// 		color: #4a4a4a;
-		// 		list-style:outside none;
-		// 		clear: both;
-		// 	}
-		// </style> 
-		// ";
+		// Build Department Listing
+		$styles = "
+		<style> 
+			.jewel-media{
+				margin: 25px 0;
+			}
+			.jewel-media-left{
+			    display: table-cell;
+    			vertical-align: middle;
+			}
+			.jewel-media-body{
+				display: table-cell;
+    			vertical-align: middle;
+    			width: 500px;
+			}
+			.jewel-url a{
+				color: #CF0A2C;
+			}
+			.jewel-img {
+				float: left;
+				max-width: 150px;
+				display: block;
+				vertical-align: middle;
+			}
+			.jewel-role-name{
+				font-size: 1.15em;
+			}
+			.jewel-display-name{
+				color: #4a4a4a;
+			    font-size: 1.4em;
+    			margin: 5px 0;
+			}
+			.jewel{
+				color: #4a4a4a;
+				list-style:outside none;
+				clear: both;
+			}
+		</style> 
+		";
+
+		$output = $styles.$output;
 
 		// foreach ($roles as $role => $data) {
-		// 	$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
+		// 	$output .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
 		// }
 
-		// // remove control characters from the output
-		// $deptList = HandlerUtilities::removeControlCharacters($deptList);
+		// remove control characters from the output
+		$output = HandlerUtilities::removeControlCharacters($output);
 
-		// // send the response
-		// return $this->sendResponse($deptList);
-	// }
+		// send the response
+		return $this->sendResponse($output);
+	}
 
 	/**
 	 * Show the form for creating a new resource.
