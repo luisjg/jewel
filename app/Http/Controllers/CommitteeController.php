@@ -18,6 +18,82 @@ class CommitteeController extends Controller {
 	 * @return Response
 	 */
 	public function showPeople($committee_id) {
+
+		// GET ALL MEMBERS IN A COMMITTEE
+		try {
+			$client = new \GuzzleHttp\Client();
+
+			$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
+			$people = $response->json();
+		}
+		catch(\Exception $e)
+		{
+			$people = [
+				// WE NEED A BETTER WAY OF HANDLING THIS
+				"status" => "503",
+				"success" => "false",
+				"members" => []
+			];
+		}
+
+
+		// chair, executive secretary, recording sedretary, members, permanent_guest
+
+	
+		//return $people;
+		
+	
+
+		foreach ($people['people'] as $person => $value) {
+			
+			if($value['pivot']['role_position']=='chair'){
+				$chairs[] = array('role' => $value['pivot']['role_position'], 'name' => $value['display_name'], 'email' => $value['email']);
+			}
+		}
+	
+
+		foreach ($people['people'] as $person => $value2) {
+			
+			if($value2['pivot']['role_position']=='executive_secretary'){
+				$execSecretary[] = array('role' => $value2['pivot']['role_position'], 'name' => $value2['display_name'], 'email' => $value2['email']);
+			}
+		}
+
+
+		foreach ($people['people'] as $person => $value3) {
+			
+			if($value3['pivot']['role_position']=='member'){
+				$members[] = array('role' => $value3['pivot']['role_position'], 'name' => $value3['display_name'], 'email' => $value3['email']);
+			}
+		}
+
+
+		foreach ($people['people'] as $person => $value4) {
+			
+			if($value4['pivot']['role_position']=='permanent_guest'){
+				$guests[] = array('role' => $value4['pivot']['role_position'], 'name' => $value4['display_name'], 'email' => $value4['email']);
+			
+			}
+		}
+
+		if (!isset($chairs)) {
+			$chairs = array();
+		}
+		if (!isset($execSecretary)) {
+			$execSecretary = array();
+		}
+		if (!isset($members)) {
+			$members = array();
+		}
+		if (!isset($guests)) {
+			$guests = array();
+		}
+
+		$result = array_merge($chairs, $execSecretary, $members, $guests);
+		
+		return $result;
+
+
 		// grab the committee with its associated people (ordered by their names)
 		// $committee = Committee::with(['people' => function($q) {
 		// 	$q->orderBy('last_name')->orderBy('first_name');
