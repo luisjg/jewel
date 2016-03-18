@@ -120,7 +120,6 @@ class DepartmentController extends Controller {
 
         $result = array_merge($chair, $professor, $lecturer, $emeritus);
 
-
 		
 	// dd($lecturer);	
 
