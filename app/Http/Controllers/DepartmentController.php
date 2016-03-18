@@ -75,7 +75,7 @@ class DepartmentController extends Controller {
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
 				if ($rank['role_name']=='chair'){
-					$chair[] = array('type' => 'chair', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
+					$chair[] = array('type' => 'Chair', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 					// return $chair;
 				}
 			}
@@ -83,8 +83,8 @@ class DepartmentController extends Controller {
 		// dd($chair);
 		//Get Department Professors
 		foreach ($people as $person => $value) {
-			if ($value['rank']=='Professor'){
-				$professor[] = array('type' => 'faculty', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
+			if ($value['rank']!='Lecturer' && $value['affiliation']=='faculty'){
+				$professor[] = array('type' => 'Faculty', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 				// return $professor;
 			}
 		}
@@ -93,14 +93,14 @@ class DepartmentController extends Controller {
 		// //Get Department Lecturers
 		foreach ($people as $person => $value) {
 			if ($value['rank']=='Lecturer'){
-				$lecturer[] = array('type' => 'lecturer', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
+				$lecturer[] = array('type' => 'Lecturer', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 				// return $lecturer;
 			}
 		}
 
 		foreach ($people as $person => $value) {
 			if ($value['affiliation']=='emeritus'){
-				$emeritus[] = array('type' => 'emiritus', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
+				$emeritus[] = array('type' => 'Emeritus', 'name' => $value['display_name'], 'rank'=> $value['rank'], 'email' => $value['email'], 'image'=> $value['image']['src']);
 				// return $lecturer;
 			}
 		}
