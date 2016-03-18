@@ -70,7 +70,6 @@ class DepartmentController extends Controller {
 		// 	'emeritus'=>''
 		// ];
 
-
 		//Get Department Chair
 		foreach ($people as $person => $value) {
 			foreach ($value['department_user'] as $department_user => $rank) {
