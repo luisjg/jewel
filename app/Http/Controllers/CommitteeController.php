@@ -20,39 +20,35 @@ class CommitteeController extends Controller {
 	public function showPeople($committee_id) {
 
 		// GET ALL MEMBERS IN A COMMITTEE
-	
+		try {
+			$client = new \GuzzleHttp\Client();
 
-		
-
-			try {
-				$client = new \GuzzleHttp\Client();
-
-				$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
-				$people = $response->json();
-				$people = $people['people'];
-
-			}
-			catch(\Exception $e)
-			{
-				$people = [
-					// WE NEED A BETTER WAY OF HANDLING THIS
-					"status" => "503",
-					"success" => "false",
-					"members" => []
-				];
-			}
+			$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
+			$people = $response->json();
+			$people = $people['people'];
+		}
+		catch(\Exception $e)
+		{
+			$people = [
+				// WE NEED A BETTER WAY OF HANDLING THIS
+				"status" => "503",
+				"success" => "false",
+				"members" => []
+			];
+		}
 
 
 		// chair, executive secretary, recording sedretary, members, permanent_guest
 
-
+	
+		//return $people;
 		
 	
 
 		foreach ($people['people'] as $person => $value) {
 			
 			if($value['pivot']['role_position']=='chair'){
-				$chairs[] = array('role' => $value['pivot']['role_position'], 'name' => $value['display_name'], 'email' => $value['email']);
+				$chairs[] = array('affiliation' => $value['affiliation'],'rank' => $value['rank'], 'role' => $value['pivot']['role_position'], 'name' => $value['display_name'], 'email' => $value['email']);
 			}
 		}
 	
@@ -60,7 +56,7 @@ class CommitteeController extends Controller {
 		foreach ($people['people'] as $person => $value2) {
 			
 			if($value2['pivot']['role_position']=='executive_secretary'){
-				$execSecretary[] = array('role' => $value2['pivot']['role_position'], 'name' => $value2['display_name'], 'email' => $value2['email']);
+				$execSecretary[] = array('affiliation' => $value2['affiliation'], 'rank' => $value2['rank'],'role' => $value2['pivot']['role_position'], 'name' => $value2['display_name'], 'email' => $value2['email']);
 			}
 		}
 
@@ -68,7 +64,7 @@ class CommitteeController extends Controller {
 		foreach ($people['people'] as $person => $value3) {
 			
 			if($value3['pivot']['role_position']=='member'){
-				$members[] = array('role' => $value3['pivot']['role_position'], 'name' => $value3['display_name'], 'email' => $value3['email']);
+				$members[] = array('affiliation' => $value3['affiliation'],'rank' => $value3['rank'],'role' => $value3['pivot']['role_position'], 'name' => $value3['display_name'], 'email' => $value3['email']);
 			}
 		}
 
@@ -76,16 +72,29 @@ class CommitteeController extends Controller {
 		foreach ($people['people'] as $person => $value4) {
 			
 			if($value4['pivot']['role_position']=='permanent_guest'){
-				$guests[] = array('role' => $value4['pivot']['role_position'], 'name' => $value4['display_name'], 'email' => $value4['email']);
+				$guests[] = array('affiliation' => $value4['affiliation'],'rank' => $value4['rank'],'role' => $value4['pivot']['role_position'], 'name' => $value4['display_name'], 'email' => $value4['email']);
 			
 			}
 		}
+
+		foreach ($people['people'] as $person => $value5) {
+			
+			if($value5['pivot']['role_position']=='recording_secretary'){
+				$recSecretary[] = array('affiliation' => $value5['affiliation'],'rank' => $value5['rank'],'role' => $value5['pivot']['role_position'], 'name' => $value5['display_name'], 'email' => $value5['email']);
+			
+			}
+		}
+
+	
 
 		if (!isset($chairs)) {
 			$chairs = array();
 		}
 		if (!isset($execSecretary)) {
 			$execSecretary = array();
+		}
+		if (!isset($recSecretary)) {
+			$recSecretary = array();
 		}
 		if (!isset($members)) {
 			$members = array();
@@ -94,11 +103,85 @@ class CommitteeController extends Controller {
 			$guests = array();
 		}
 
-		$result = array_merge($chairs, $execSecretary, $members, $guests);
+		$result = array_merge($chairs, $execSecretary, $recSecretary, $members, $guests);
 		
-		return $result;
+		//return $result;
 
 
+		$output = " ";
+		$role = "";
+		
+		$first = 0;
+		$username = "";
+
+		 foreach ($result as $key) {
+		 	$exploded = explode ('@', $key['email']);
+			$username = $exploded[0];
+
+		 	if($role != $key['role'] && $first++){
+		 		$output .= '<hr />';
+			}
+		 	$output .= "<div class='jewel-media'>";
+		 		$output .= "<div class='jewel-media-body'>";
+		 				if($role != $key['role']){
+						 		$output .= '<h2>'.$key['role'].'</h2>';
+						 }
+					
+                       $output .= "<ul class='jewel'>";
+						 	
+                            $output .= "<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$key['name']}</h3></li>";
+                            $output .= "<li class='jewel-role-name'>{$key['rank']}</li>";
+                            $output .= "<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$key['email']}'>{$key['email']}</a></li>";
+                            if($key['affiliation'] == 'faculty'){
+                            	$output .= "<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$username}'>View Profile</a></li>";
+                            }
+                        $output .= '</ul>';
+                    $output .= '</div>';
+                $output .= '</div>';
+
+               $role = $key['role'];
+		 }
+
+		 $styles = "
+        <style> 
+            .jewel-media{
+                margin: 25px 0;
+            }
+            .jewel-media-left{
+                display: table-cell;
+               vertical-align: middle;
+            }
+            .jewel-media-body{
+                display: table-cell;
+               vertical-align: middle;
+               width: 500px;
+            }
+            .jewel-url a{
+                color: #CF0A2C ;
+            }
+            .jewel-img {
+                float: left;
+                max-width: 150px;
+                display: block;
+                vertical-align: middle;
+            }
+            .jewel-role-name{
+                font-size: 1.15em;
+            }
+            .jewel-display-name{
+                color: #4a4a4a ;
+                font-size: 1.4em;
+               margin: 5px 0;
+            }
+            .jewel{
+                color: #4a4a4a ;
+                list-style:outside none;
+                clear: both;
+            }
+        </style> 
+        ";
+
+        $output = $styles.$output;
 		// grab the committee with its associated people (ordered by their names)
 		// $committee = Committee::with(['people' => function($q) {
 		// 	$q->orderBy('last_name')->orderBy('first_name');
@@ -188,25 +271,25 @@ class CommitteeController extends Controller {
 		// }
 
 		// convert everything to HTML
-		$data = "<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Role</th>
-					<th>Appointed or Elected By</th>
-					<th>Member Of</th>
-					<th>Term Expires</th>
-				</tr>
-			</thead>
-			<tbody>";
-		$data .= implode("", $roles);
-		$data .= "</tbody></table>";
+		// $data = "<table>
+		// 	<thead>
+		// 		<tr>
+		// 			<th>Name</th>
+		// 			<th>Role</th>
+		// 			<th>Appointed or Elected By</th>
+		// 			<th>Member Of</th>
+		// 			<th>Term Expires</th>
+		// 		</tr>
+		// 	</thead>
+		// 	<tbody>";
+		// $data .= implode("", $roles);
+		// $data .= "</tbody></table>";
 
 		// remove control characters from the output
-		$data = HandlerUtilities::removeControlCharacters($data);
+		$output = HandlerUtilities::removeControlCharacters($output);
 
 		// send the response back
-		return $this->sendResponse($data);
+		return $this->sendResponse($output);
 	}
 
 }
