@@ -20,27 +20,32 @@ class CommitteeController extends Controller {
 	public function showPeople($committee_id) {
 
 		// GET ALL MEMBERS IN A COMMITTEE
-		try {
-			$client = new \GuzzleHttp\Client();
+	
 
-			$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
-			$people = $response->json();
-		}
-		catch(\Exception $e)
-		{
-			$people = [
-				// WE NEED A BETTER WAY OF HANDLING THIS
-				"status" => "503",
-				"success" => "false",
-				"members" => []
-			];
-		}
+		
+
+			try {
+				$client = new \GuzzleHttp\Client();
+
+				$response = $client->get("https://directory-demo.sandbox.csun.edu/committees/{$committee_id}/members");
+				$people = $response->json();
+				$people = $people['people'];
+
+			}
+			catch(\Exception $e)
+			{
+				$people = [
+					// WE NEED A BETTER WAY OF HANDLING THIS
+					"status" => "503",
+					"success" => "false",
+					"members" => []
+				];
+			}
 
 
 		// chair, executive secretary, recording sedretary, members, permanent_guest
 
-	
-		//return $people;
+
 		
 	
 

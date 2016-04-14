@@ -37,7 +37,6 @@ class DepartmentController extends Controller {
 
 				$response = $client->get("https://directory-demo.sandbox.csun.edu/departments/{$dept_id}/members");
 				$people = $response->json();
-				// $people = $people['person'];
 				$people = $people['people'];
 
 			}
@@ -47,7 +46,7 @@ class DepartmentController extends Controller {
 					// WE NEED A BETTER WAY OF HANDLING THIS
 					"status" => "503",
 					"success" => "false",
-					"classes" => []
+					"members" => []
 				];
 			}
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
