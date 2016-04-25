@@ -44,12 +44,22 @@ class DepartmentController extends Controller {
 		->get();
 
 		// Separate Data By Role
-		$roles = [
+		if ($dept_id == "ftca") // Special case for FTCA
+		{
+			$roles = [
+				'chair'=>'',
+				'faculty'=>''
+			];
+		}
+		else // Case for regular departments
+		{
+			$roles = [
 			'chair'=>'',
 			'faculty' =>'',
 			'Lecturer'=>'',
 			'emeritus'=>''
-		];
+			];
+		}
 		
 		foreach ($persons as $person) {
 
@@ -67,9 +77,12 @@ class DepartmentController extends Controller {
 				$role_name = $person->departmentUser->first()->role_name;
 
 					// Assign Lecturers
-					if($person->rank == 'Lecturer') {
-						$role_name = $person->rank;
-				}
+					if ($dept_id != "ftca")
+					{
+						if($person->rank == 'Lecturer') {
+							$role_name = $person->rank;
+						}
+					}
 			}
 			
 			// Grab Faculty Profile Image
@@ -140,7 +153,11 @@ class DepartmentController extends Controller {
 		";
 
 		foreach ($roles as $role => $data) {
-			$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
+			if ($dept_id == "ftca") // special case for FTCA
+				$deptList .= "<h2 id='" . strtolower($role) . "'>" . ($role=="chair"?"Director":"Faculty Technology Fellows") . "</h2>${data}<hr>";
+
+			else // case for regular departments
+				$deptList .= "<h2 id='" . strtolower($role) . "'>".ucwords($role)."</h2>${data}<hr>";
 		}
 
 		// remove control characters from the output
