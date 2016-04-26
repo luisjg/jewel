@@ -24,6 +24,9 @@ Route::group(['prefix' => 'api'], function() {
 	// Example: /api/committees/atc/people
 	Route::get('committees/{committee_id}/people', 'CommitteeController@showPeople');
 
+
+	Route::get('centers/{center_id}/people', 'CenterController@showPeople');
+
 });
 
 // legacy route to support /data?department_id=[dept_id]
