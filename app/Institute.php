@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Center extends Model {
+class Institute extends Model {
 	/**
 	 * The database table used by the model.
 	 *

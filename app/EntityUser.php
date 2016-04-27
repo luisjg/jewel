@@ -7,7 +7,7 @@ class EntityUser extends Model {
 	protected $table = 'faculty.entity_user';		
 	protected $fillable = [];
 
-	public function Person(){
+	public function Person() {
 		return $this->belongsTo('Jewel\Person', 'user_id');
 	}
 
@@ -18,6 +18,15 @@ class EntityUser extends Model {
 	 */
 	public function center() {
 		return $this->belongsTo('Jewel\Center', 'parent_entities_id');
+	}
+
+	/**
+	* Returns the institute to which this user belongs.
+	*
+	* @return Builder|Model
+	*/
+	public function institute() {
+		return $this->belongsTo('Jewel\Insitute', 'parent_entities_id');
 	}
 
 }
