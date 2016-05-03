@@ -30,7 +30,7 @@ class InstituteController extends Controller {
 	/**
 	 * Display a listing of the people in the given institute
 	 *
-	 * @param string $center The system name of the institute
+	 * @param string $institute_id The system name of the institute
 	 * @return Response
 	 */
 	public function showPeople($institute_id)
@@ -155,7 +155,6 @@ class InstituteController extends Controller {
 		// send the response
 		return $this->sendResponse($entityList);
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.

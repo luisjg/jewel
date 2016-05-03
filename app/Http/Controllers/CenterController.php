@@ -30,7 +30,7 @@ class CenterController extends Controller {
 	/**
 	 * Display a listing of the people in the given center
 	 *
-	 * @param string $center The system name of the center
+	 * @param string $center_id The system name of the center
 	 * @return Response
 	 */
 	public function showPeople($center_id)

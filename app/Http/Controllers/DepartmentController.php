@@ -64,12 +64,13 @@ class DepartmentController extends Controller {
 				$role_name = $chair->role_name;
 				
 			} else{
-				$role_name = $person->departmentUser->first()->role_name;
+				$role_name = $person->affiliation;
 
 					// Assign Lecturers
-					if($person->rank == 'Lecturer') {
+				if($person->rank == 'Lecturer') {
 						$role_name = $person->rank;
 				}
+
 			}
 			
 			// Grab Faculty Profile Image

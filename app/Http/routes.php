@@ -29,6 +29,8 @@ Route::group(['prefix' => 'api'], function() {
 
 	Route::get('institutes/{institute_id}/people', 'InstituteController@showPeople');
 
+	// Route::get('institutes/{institute_id}/test', 'InstituteController@showPeopleTest');
+
 });
 
 // legacy route to support /data?department_id=[dept_id]
