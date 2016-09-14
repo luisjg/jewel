@@ -52,17 +52,28 @@ class CommitteeController extends Controller {
 				// exceptions from being thrown
 				if($person->departmentUser->count() > 0) {
 					$person->departmentUser->load('department');
+
 					if($attr['type'] == "departments") {
 						// committee made up of department representatives
-						$memberOf = $person->departmentUser[0]->department->name;
+						if ($person->departmentUser[0]->department == NULL) {
+							$memberOf = 'Unknonwn';
+						}
+						else {
+							$memberOf = $person->departmentUser[0]->department->name;
+						}
 					}
-					else
-					{
+					else {
 						// ensure the person is a member of a resolvable department first
 						if($person->departmentUser[0]->department != null) {
 						// committee made up of college representatives (academic groups)
 							$person->departmentUser[0]->department->load('academicGroup');
-							$memberOf = $person->departmentUser[0]->department->academicGroup->name;
+							if ($person->departmentUser[0]->department->academicGroup == NULL) {
+								$memberOf = 'Unknown';
+							} else {
+								$memberOf = $person->departmentUser[0]->department->academicGroup->name;
+							}
+						} else {
+							$memberOf = 'Unknown';
 						}
 					}
 				}
@@ -74,12 +85,11 @@ class CommitteeController extends Controller {
 				$roleName = ucwords(str_replace("_", " ", $position));
 
 				// should there be a link to a Faculty profile?
-				$nameMarkup = $person->common_name;
+				$nameMarkup = $person->display_name;
 				if(($position == "chair" || $position == "member") && $person->affiliation != "student") {
-					$nameMarkup = "<a href='http://metalab.csun.edu/faculty/profiles/{$person->email_uri}' target='_blank'>$nameMarkup</a>";
+					$nameMarkup = "<a href='http://www.csun.edu/faculty/profiles/{$person->email_uri}' target='_blank'>$nameMarkup</a>";
 				}
-				else
-				{
+				else {
 					// grab their contact information from their primary contact
 					// and use that in place of the "Member Of" column for something
 					// that isn't a committee
@@ -91,6 +101,7 @@ class CommitteeController extends Controller {
 					if(!empty($contact)) {
 						$memberOf = $contact->title;
 					}
+
 				}
 
 				// add the data to the proper key
