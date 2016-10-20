@@ -72,20 +72,13 @@ class DepartmentController extends Controller {
 				}
 
 			}
-			
-			// Grab Faculty Profile Image
-			if(!$person->image){
-				$img = 'imgs/profile-default.png';
-			} else {
-				$img = 'uploads/imgs/'.$person->image->src;
-			}
 
 			// Interpolate & Append Markup
 			if (array_key_exists($role_name, $roles)) {
 				$roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='https://www.metalab.csun.edu/faculty/{$img}' alt='Image of {$person->display_name}'>
+						<img class='jewel-img' src='{$person->profile_image_url}' alt='Image of {$person->display_name}'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
