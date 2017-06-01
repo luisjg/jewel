@@ -34,6 +34,8 @@ class DepartmentController extends Controller {
 		$persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
 		})
+		// DO NOT LIST THE DECEASED
+		->where('deceased', '0')
 		// GRAB THE IMAGE
 		->with('image')
 		// ONLY LOAD THE DEPARTMENT REQUESTED (makes using first() ok below)
