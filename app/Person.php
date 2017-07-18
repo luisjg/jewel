@@ -20,23 +20,32 @@ class Person extends Model {
 		return $this->hasOne('Jewel\Image', 'imageable_id');
 	}
 
-	public function getEmailURIAttribute() {
-	    return strtok($this->email, '@');
-	}
+    /**
+     * Returns the email URI for this Person without the domain suffix
+     *
+     * @return string
+     */
+    public function getEmailURIAttribute() {
+        return strtok(strtolower($this->email), '@');
+    }
 
-	/**
-	 * Returns the full URL to the profile image for this Person. If no profile
-	 * image can be resolved it returns the full URL to a default placeholder
-	 * image.
-	 *
-	 * @return string
-	 */
-	public function getProfileImageURLAttribute() {
-		$base = 'https://cdn.metalab.csun.edu/photos/';
-		if ($this->image) {
-			return $base . $this->image->src;
-		}
-		return $base . 'profile-default.png';
-	}
+    /**
+     * Returns the full URL to the profile image for this Person. If no profile
+     * image can be resolved it returns the full URL to a default placeholder
+     * image.
+     *
+     * @return string
+     */
+    public function getProfileImageURLAttribute() {
+        if ($this->image) {
+            if(env('IMAGE_VIEW_LOCATION')) {
+                return env('IMAGE_VIEW_LOCATION') . $this->emailURI .
+                    '/' . $this->image->src;
+            }
+            return asset('uploads/imgs/' . $this->emailURI .
+                '/' . $this->image->src);
+        }
+        return asset('imgs/profile-default.png');
+    }
 
 }
