@@ -56,7 +56,7 @@ class CommitteeController extends Controller {
 					if($attr['type'] == "departments") {
 						// committee made up of department representatives
 						if ($person->departmentUser[0]->department == NULL) {
-							$memberOf = 'Unknonwn';
+							$memberOf = 'Unknown';
 						}
 						else {
 							$memberOf = $person->departmentUser[0]->department->name;
