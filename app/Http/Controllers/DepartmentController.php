@@ -8,6 +8,7 @@ use Request;
 use Jewel\Department;
 use Jewel\Person;
 use Jewel\Http\Controllers\Response;
+use Jewel\Contact;
 
 
 class DepartmentController extends Controller {
@@ -54,7 +55,7 @@ class DepartmentController extends Controller {
 			'Lecturer'=>'',
 			'emeritus'=>''
 		];
-		
+
 		foreach ($persons as $person) {
 
 			// Grab Person Departments
@@ -62,6 +63,18 @@ class DepartmentController extends Controller {
 
 			// Check if Person is a Chair
 			$chair = $departments->where('role_name', 'chair')->first();
+
+			//Retrieve department email
+
+            $contact = Contact::where('entities_id', $person->individuals_id)
+            ->where('parent_entities_id', $person->departmentUser[0]->department_id)
+            ->first();
+
+            if (!empty($contact) && !empty($contact->email)) {
+                $department_email = $contact->email;
+            } else {
+                $department_email = $person->email;
+            }
 
 			// Assign Chair and Run the rest of the Department Listing
 			if($chair){
@@ -88,7 +101,7 @@ class DepartmentController extends Controller {
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
-							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
+							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
 							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
 						</ul>
 					</div>
