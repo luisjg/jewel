@@ -36,6 +36,8 @@ class DepartmentController extends Controller {
 		})
 		// DO NOT LIST THE DECEASED
 		->where('deceased', '0')
+        // DO NOT LIST THE INACTIVE
+        ->where('affiliation_status', 'Active')
 		// GRAB THE IMAGE
 		->with('image')
 		// ONLY LOAD THE DEPARTMENT REQUESTED (makes using first() ok below)
