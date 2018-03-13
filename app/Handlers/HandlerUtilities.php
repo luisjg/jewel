@@ -1,4 +1,6 @@
-<?php namespace Jewel\Handlers;
+<?php
+
+namespace App\Handlers;
 
 class HandlerUtilities
 {

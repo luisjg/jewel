@@ -1,32 +1,19 @@
-<?php namespace Jewel\Providers;
+<?php
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+namespace App\Providers;
 
-class EventServiceProvider extends ServiceProvider {
+use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
-	/**
-	 * The event handler mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		'event.name' => [
-			'EventListener',
-		],
-	];
-
-	/**
-	 * Register any other events for your application.
-	 *
-	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-	 * @return void
-	 */
-	public function boot(DispatcherContract $events)
-	{
-		parent::boot($events);
-
-		//
-	}
-
+class EventServiceProvider extends ServiceProvider
+{
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'App\Events\SomeEvent' => [
+            'App\Listeners\EventListener',
+        ],
+    ];
 }

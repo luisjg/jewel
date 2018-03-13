@@ -1,37 +1,30 @@
-<?php namespace Jewel\Http\Controllers;
+<?php
 
-use Jewel\Handlers\HandlerUtilities;
+namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Handlers\HandlerUtilities;
+use Illuminate\Support\Facades\Request;
+use Laravel\Lumen\Routing\Controller as BaseController;
 
-use Request;
+class Controller extends BaseController
+{
+    /**
+     * Parses the request type and sends the appropriate
+     * Response
+     *
+     * @param Collection $data the data object.
+     * @return mixed
+     */
+    protected function sendResponse($data)
+    {
+        if (Request::get('web-one') === 'true') {
+            $data = HandlerUtilities::addWebOneStyle($data);
+        }
 
-abstract class Controller extends BaseController {
+        if (Request::get('format') === 'html') {
+            return $data;
+        }
 
-	use DispatchesCommands, ValidatesRequests;
-
-	/**
-	 * Sends the response back using the supplied data.
-	 *
-	 * @param string The data to send back
-	 * @return string|Response
-	 */
-	protected function sendResponse($data) {
-		// Add web-one formatting if requested
-		if(Request::get('web-one') == 'true'){
-			$data = HandlerUtilities::addWebOneStyle($data);
-		}
-
-		// Optional HTML Formatting
-		if (Request::get('format') == 'html') {
-			return $data;
-		}
-
-		// Dumb Web-One Needs A Double Casted Array
-		return response()->json([['data' => $data]])->setCallback('jsonp_received');
-	}
-
-
+        return response()->json([['data' => $data]]);
+    }
 }

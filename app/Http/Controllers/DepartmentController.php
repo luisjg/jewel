@@ -1,23 +1,23 @@
-<?php namespace Jewel\Http\Controllers;
+<?php
 
-use Jewel\Handlers\HandlerUtilities;
+namespace App\Http\Controllers;
 
-use Jewel\Http\Controllers\Controller;
-use Request;
+use App\Handlers\HandlerUtilities;
 
-use Jewel\Department;
-use Jewel\Person;
-use Jewel\Http\Controllers\Response;
-use Jewel\Contact;
+use App\Models\Department;
+use App\Models\Person;
+use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 
-
-class DepartmentController extends Controller {
-
-	public function index() {
-		//
-	}
-
-	// temporary route to support /data?department_id=[dept_id]
+class DepartmentController extends Controller
+{
+    // temporary route to support /data?department_id=[dept_id]
+    /**
+     * This handles the endpoint for both
+     * /data and /api/departments
+     *
+     * @return Response
+     */
 	public function showData() {
 		$dept_id = Request::get('department_id');
 		return $this->showPeople($dept_id);
@@ -34,13 +34,13 @@ class DepartmentController extends Controller {
 		// RETURN PEOPLE WHO HAVE DEPARTMENT
 		$persons = Person::whereHas('departmentUser', function($q) use ($dept_id) {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
-		})
-		// DO NOT LIST THE DECEASED
-		->where('deceased', '0')
+        })
+        ->with('image')
+        // DO NOT LIST THE DECEASED
+        ->where('deceased', '0')
         // DO NOT LIST THE INACTIVE
         ->where('affiliation_status', 'Active')
-		// GRAB THE IMAGE
-		->with('image')
+        // GRAB THE IMAGE
 		// ONLY LOAD THE DEPARTMENT REQUESTED (makes using first() ok below)
 		->with(['departmentUser' => function($q) use ($dept_id) {
 			$q->where('department_id', 'academic_departments:'.$dept_id);
@@ -56,6 +56,13 @@ class DepartmentController extends Controller {
 			'emeritus'=>''
 		];
 
+		// Generate array of individuals_id's in order to get their contact email
+        // We get the contacts here in one shot then filter based on
+        // individuals department below.
+		$memberIds = $persons->pluck('individuals_id')->toArray();
+        $contacts = Contact::where('entities_id', $memberIds)->get();
+
+
 		foreach ($persons as $person) {
 
 			// Grab Person Departments
@@ -64,11 +71,12 @@ class DepartmentController extends Controller {
 			// Check if Person is a Chair
 			$chair = $departments->where('role_name', 'chair')->first();
 
-			//Retrieve department email
-
-            $contact = Contact::where('entities_id', $person->individuals_id)
-            ->where('parent_entities_id', $person->departmentUser[0]->department_id)
-            ->first();
+			// Filter the contact based on the individuals department email
+            $contact = $contacts->filter(function ($item) use ($person) {
+                if ($item->parent_entities_id === $person->departmentUser[0]->department_id) {
+                    return $item;
+                }
+            });
 
             if (!empty($contact) && !empty($contact->email)) {
                 $department_email = $contact->email;
@@ -95,14 +103,14 @@ class DepartmentController extends Controller {
 				$roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='{$person->profile_image_url}' alt='Image of {$person->display_name}'>
+						<img class='jewel-img' src='{$person->profile_image_u_r_l}' alt='Image of {$person->display_name}'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
-							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->email_u_r_i}'>View Profile</a></li>
 						</ul>
 					</div>
 				</div>
@@ -160,69 +168,4 @@ class DepartmentController extends Controller {
 		// send the response
 		return $this->sendResponse($deptList);
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($dept_id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($dept_id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($dept_id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($dept_id)
-	{
-		//
-	}
-
 }

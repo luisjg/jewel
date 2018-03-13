@@ -1,15 +1,13 @@
-<?php namespace Jewel\Http\Controllers;
+<?php
 
-use Jewel\Handlers\HandlerUtilities;
+namespace App\Http\Controllers;
 
-use Jewel\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Handlers\HandlerUtilities;
+use App\Models\Committee;
+use App\Models\Contact;
 
-use Jewel\Committee;
-use Jewel\Contact;
-use Jewel\Http\Controllers\Response;
-
-class CommitteeController extends Controller {
+class CommitteeController extends Controller
+{
 
 	/**
 	 * Returns a listing of all people in the specified committee.
@@ -138,5 +136,4 @@ class CommitteeController extends Controller {
 		// send the response back
 		return $this->sendResponse($data);
 	}
-
 }

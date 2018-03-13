@@ -1,27 +1,21 @@
-<?php namespace Jewel\Http\Controllers;
+<?php
 
-use Jewel\Handlers\HandlerUtilities;
+namespace App\Http\Controllers;
 
-use Requests;
-use Jewel\Http\Controllers\Controller;
+use App\Handlers\HandlerUtilities;
+use App\Models\Person;
+use Illuminate\Support\Facades\Request;
 
-use Jewel\Center;
-use Jewel\Person;
-use Jewel\Controllers\Response;
+class CenterController extends Controller
+{
 
-class CenterController extends Controller {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-	public function showData()
+    /**
+     * This is the entry poin for the
+     * /api/centers end point
+     *
+     * @return Response
+     */
+    public function showData()
 	{
 		$center_id = Request::get('center_id');
 		return $this->showPeople($center_id);
@@ -81,14 +75,14 @@ class CenterController extends Controller {
 				$roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='{$person->profile_image_url}' alt='Image of {$person->display_name}'>
+						<img class='jewel-img' src='{$person->profile_image_u_r_l}' alt='Image of {$person->display_name}'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$person->email}'>{$person->email}</a></li>
-							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->getEmailURIAttribute()}'>View Profile</a></li>
+							<li class='jewel-url'><a target='_blank' href='http://www.csun.edu/faculty/profiles/{$person->email_u_r_i}'>View Profile</a></li>
 						</ul>
 					</div>
 				</div>
@@ -148,70 +142,4 @@ class CenterController extends Controller {
 		// send the response
 		return $this->sendResponse($entityList);
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }
