@@ -1,17 +1,6 @@
-# Laravel
-/bootstrap/compiled.php
 /vendor
-/node_modules
+/.idea
+Homestead.json
+Homestead.yaml
 .env
-.env.*
-!.env.example
-.env.*.php
-.env.php
-
-# Composer
-composer.phar
-composer.lock
-
-# OS
 .DS_Store
-Thumbs.db
