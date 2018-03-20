@@ -5,3 +5,6 @@ Homestead.yaml
 .env
 .DS_Store
 Thumbs.db
+/storage/departments
+/storage/institutes
+/storage/centers
