@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "405d78ca51aab72afea4a4d745c65b27",
+    "content-hash": "2ef917330744b9c3678c8a85df8bb9f4",
     "packages": [
         {
             "name": "csun-metalab/lumen-force-https",
