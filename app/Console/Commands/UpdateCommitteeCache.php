@@ -34,8 +34,10 @@ class UpdateCommitteeCache extends Command
             File::put(storage_path('committees/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'committees\' data has been added to the cache.');
         } else {
+            if (!File::exists(storage_path('committees'))) {
+                File::makeDirectory(storage_path('committees'));
+            }
             $deptList = DataHandler::getCommitteeData($entity_id);
-            File::makeDirectory(storage_path('committees'));
             File::put(storage_path('committees/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'committees\' data has been added to the cache.');
         }

@@ -23,8 +23,9 @@ class CommitteeController extends Controller
             $process->start();
         } else {
             $data = DataHandler::getCommitteeData($committee_id);
-            File::makeDirectory(storage_path('committees'));
-            File::put(storage_path('committees/' . $committee_id . '.txt'), $data);
+            if ($this->findOrCreateDirectory('committees')) {
+                File::put(storage_path('committees/' . $committee_id . '.txt'), $data);
+            }
         }
 		// send the response back
 		return $this->sendResponse($data);

@@ -34,8 +34,10 @@ class UpdateCenterCache extends Command
             File::put(storage_path('centers/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'centers\' data has been added to the cache.');
         } else {
+            if (!File::exists(storage_path('centers'))) {
+                File::makeDirectory(storage_path('centers'));
+            }
             $deptList = DataHandler::getCenterData($entity_id);
-            File::makeDirectory(storage_path('centers'));
             File::put(storage_path('centers/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'centers\' data has been added to the cache.');
         }

@@ -36,8 +36,9 @@ class CenterController extends Controller
             $process->start();
         } else {
             $data = DataHandler::getCenterData($center_id);
-            File::makeDirectory(storage_path('centers'));
-            File::put(storage_path( 'centers/' . $center_id . '.txt'), $data);
+            if ($this->findOrCreateDirectory('centers')) {
+                File::put(storage_path( 'centers/' . $center_id . '.txt'), $data);
+            }
         }
 		// send the response
 		return $this->sendResponse($data);

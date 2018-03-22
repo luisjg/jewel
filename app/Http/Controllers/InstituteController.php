@@ -36,8 +36,9 @@ class InstituteController extends Controller
             $process->start();
         } else {
             $entityList = DataHandler::getInstituteData($institute_id);
-            File::makeDirectory(storage_path('institutes'));
-            File::put(storage_path('institutes/' . $institute_id . '.txt'), $entityList);
+            if ($this->findOrCreateDirectory('institutes')) {
+                File::put(storage_path('institutes/' . $institute_id . '.txt'), $entityList);
+            }
         }
 		// send the response
 		return $this->sendResponse($entityList);

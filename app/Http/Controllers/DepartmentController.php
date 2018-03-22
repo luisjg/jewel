@@ -35,8 +35,9 @@ class DepartmentController extends Controller
 	        $process->start();
         } else {
             $deptList = DataHandler::getDepartmentData($dept_id);
-            File::makeDirectory(storage_path('departments'));
-            File::put(storage_path('departments/' . $dept_id . '.txt'), $deptList);
+            if ($this->findOrCreateDirectory('departments')) {
+                File::put(storage_path('departments/' . $dept_id . '.txt'), $deptList);
+            }
         }
 		// send the response
 		return $this->sendResponse($deptList);

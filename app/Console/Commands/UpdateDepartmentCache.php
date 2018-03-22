@@ -34,8 +34,10 @@ class UpdateDepartmentCache extends Command
             File::put(storage_path('departments/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'departments\' data has been added to the cache.');
         } else {
+            if (!File::exists(storage_path('departments'))) {
+                File::makeDirectory(storage_path('departments'));
+            }
             $deptList = DataHandler::getDepartmentData($entity_id);
-            File::makeDirectory(storage_path('departments'));
             File::put(storage_path('departments/'.$entity_id.'.txt'), $deptList);
             $this->info('The \'departments\' data has been added to the cache.');
         }
