@@ -3,9 +3,8 @@
 Homestead.json
 Homestead.yaml
 .env
+!.env.example
+.env.*
 .DS_Store
 Thumbs.db
-/storage/departments
-/storage/institutes
-/storage/centers
-/storage/committees
+/storage
