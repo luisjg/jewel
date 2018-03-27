@@ -22,6 +22,5 @@
     @include('layouts.partials.footer')
     {{-- APP CONTENT ENDS --}}
     {{-- APP SCRIPTS --}} 
-    <script src="{!! url('js/app.js') !!}"></script>
 </body>
 </html>
