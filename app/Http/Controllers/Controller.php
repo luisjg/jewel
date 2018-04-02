@@ -26,7 +26,9 @@ class Controller extends BaseController
             return $data;
         }
 
-        return response()->json([['data' => $data]]);
+        return response()
+            ->json([['data' => $data]])
+            ->setCallback('jsonp_received');
     }
 
     /**
