@@ -38,8 +38,8 @@ class AccordionController extends Controller
 		foreach($data as $item) {
 			$anchor = str_replace(' ', '', $item['header']);
 			$markup .= "
-				<a name=\"{$anchor}\"></a>
 				<h2 class=\"field field-name-field-title-text field-type-text field-label-hidden\">
+					<a name=\"{$anchor}\"></a>
 					{$item['header']}
 				</h2>
 				<div class=\"field field-name-field-body field-type-text-long field-label-hidden\">
