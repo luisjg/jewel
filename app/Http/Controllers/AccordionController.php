@@ -45,7 +45,22 @@ class AccordionController extends Controller
 				</div>
 			";
 		}
-		$markup = "<div class=\"jewel-accordion\"><div id=\"accordion\">{$markup}</div></div>";
+
+		// create the JS to make the markup function as an accordion
+		$script = "
+			alert('I cannot believe it works');
+		";
+		
+		$markup = "
+			<div class=\"jewel-accordion\">
+				<div id=\"accordion\">
+					{$markup}
+				</div>
+			</div>
+			<script type=\"text/javascript\">
+				{$script}
+			</script>
+		";
 
 		// remove any control characters and send the response
 		$markup = HandlerUtilities::removeControlCharacters($markup);
