@@ -36,7 +36,9 @@ class AccordionController extends Controller
 
 		// generate the main accordion element markup
 		foreach($data as $item) {
+			$anchor = str_replace(' ', '', $item['header']);
 			$markup .= "
+				<a name=\"{$anchor}\"></a>
 				<h2 class=\"field field-name-field-title-text field-type-text field-label-hidden\">
 					{$item['header']}
 				</h2>
