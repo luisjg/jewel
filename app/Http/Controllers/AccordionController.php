@@ -45,7 +45,7 @@ class AccordionController extends Controller
 				</div>
 			";
 		}
-		$markup = "<div id=\"accordion\" class=\"jewel-accordion\">{$markup}</div>";
+		$markup = "<div class=\"jewel-accordion\"><div id=\"accordion\">{$markup}</div></div>";
 
 		// remove any control characters and send the response
 		$markup = HandlerUtilities::removeControlCharacters($markup);
