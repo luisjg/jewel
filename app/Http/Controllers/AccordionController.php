@@ -48,9 +48,9 @@ class AccordionController extends Controller
 
 		// create the JS to make the markup function as an accordion
 		$script = "
-			alert('I cannot believe it works');
+			Drupal.behaviors.csunThemeLoad($('.jewel-accordion'));
 		";
-		
+
 		$markup = "
 			<div class=\"jewel-accordion\">
 				<div id=\"accordion\">
