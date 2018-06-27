@@ -29,3 +29,6 @@ $router->get('centers/{center_id}/people', 'CenterController@showPeople');
 $router->get('institutes/{institute_id}/people', 'InstituteController@showPeople');
 
 // $router->get('institutes/{institute_id}/test', 'InstituteController@showPeopleTest');
+
+// temporary route to test accordion functionality
+$router->get('accordion', 'AccordionController@showData');
