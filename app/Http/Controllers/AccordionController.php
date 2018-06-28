@@ -46,26 +46,8 @@ class AccordionController extends Controller
 			";
 		}
 
-		// create the JS to make the markup function as an accordion
-		$script = "
-			(function ($) {
-				Drupal.attachBehaviors($('.jewel-accordion'));
-			})(jQuery);
-		";
-
-		$markup = "
-			<div class=\"jewel-accordion\">
-				<div id=\"accordion\">
-					{$markup}
-				</div>
-			</div>
-			<script type=\"text/javascript\">
-				{$script}
-			</script>
-		";
-
 		// remove any control characters and send the response
 		$markup = HandlerUtilities::removeControlCharacters($markup);
-		return $this->sendResponse($markup);
+		return $this->sendWeboneAccordionResponse($markup);
 	}
 }

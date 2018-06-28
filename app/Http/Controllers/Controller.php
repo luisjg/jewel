@@ -13,8 +13,8 @@ class Controller extends BaseController
      * Parses the request type and sends the appropriate
      * Response
      *
-     * @param Collection $data the data object.
-     * @return mixed
+     * @param string $data The markup to send
+     * @return Response
      */
     protected function sendResponse($data)
     {
@@ -25,6 +25,37 @@ class Controller extends BaseController
         if (Request::get('format') === 'html') {
             return $data;
         }
+
+        return response()
+            ->json([['data' => $data]])
+            ->setCallback('jsonp_received');
+    }
+
+    /**
+     * Sends the markup as a Web-One accordion with matching markup and script
+     * functionality.
+     *
+     * @param string $data The initial markup for the accordion
+     * @return Response
+     */
+    protected function sendWeboneAccordionResponse($data) {
+        // create the JS to make the markup function as an accordion
+        $script = "
+            (function ($) {
+                Drupal.attachBehaviors($('.jewel-accordion'));
+            })(jQuery);
+        ";
+
+        $data = "
+            <div class=\"jewel-accordion\">
+                <div id=\"accordion\">
+                    {$data}
+                </div>
+            </div>
+            <script type=\"text/javascript\">
+                {$script}
+            </script>
+        ";
 
         return response()
             ->json([['data' => $data]])
