@@ -86,6 +86,8 @@ $app->register(CSUNMetaLab\LumenProxyPass\Providers\ProxyPassServiceProvider::cl
 
 $app->configure('guzzle');
 
+$app->configure('webservices');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
