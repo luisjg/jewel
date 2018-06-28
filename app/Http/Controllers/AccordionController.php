@@ -34,20 +34,9 @@ class AccordionController extends Controller
 			],
 		];
 
-		// generate the main accordion element markup
-		foreach($data as $item) {
-			$markup .= "
-				<h2 class=\"field field-name-field-title-text field-type-text field-label-hidden\">
-					{$item['header']}
-				</h2>
-				<div class=\"field field-name-field-body field-type-text-long field-label-hidden\">
-					<p>{$item['content']}</p>
-				</div>
-			";
-		}
-
 		// remove any control characters and send the response
 		$markup = HandlerUtilities::removeControlCharacters($markup);
-		return $this->sendWeboneAccordionResponse($markup);
+		$markup = HandlerUtilities::weboneAccordionFromArray($markup);
+		return $this->sendResponse($markup);
 	}
 }

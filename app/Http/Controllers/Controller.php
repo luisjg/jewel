@@ -32,37 +32,6 @@ class Controller extends BaseController
     }
 
     /**
-     * Sends the markup as a Web-One accordion with matching markup and script
-     * functionality.
-     *
-     * @param string $data The initial markup for the accordion
-     * @return Response
-     */
-    protected function sendWeboneAccordionResponse($data) {
-        // create the JS to make the markup function as an accordion
-        $script = "
-            (function ($) {
-                Drupal.attachBehaviors($('.jewel-accordion'));
-            })(jQuery);
-        ";
-
-        $data = "
-            <div class=\"jewel-accordion\">
-                <div id=\"accordion\">
-                    {$data}
-                </div>
-            </div>
-            <script type=\"text/javascript\">
-                {$script}
-            </script>
-        ";
-
-        return response()
-            ->json([['data' => $data]])
-            ->setCallback('jsonp_received');
-    }
-
-    /**
      * Finds or creates a directory given the name and
      * returns true or false.
      *

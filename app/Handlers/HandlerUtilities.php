@@ -60,6 +60,51 @@ class HandlerUtilities
 	}
 
 	/**
+	 * Takes an array of associative arrays and generates the markup that then
+	 * becomes a Web-One accordion. Each sub-array needs to have both a "header"
+	 * and "content" key that represent the appropriate part of each accordion
+	 * element.
+	 *
+	 * @param array $array The array to use for generating markup
+	 * @return string
+	 */
+	public static function weboneAccordionFromArray($array) {
+		$markup = "";
+
+		// generate the main accordion element markup
+		foreach($array as $item) {
+			$markup .= "
+				<h2 class=\"field field-name-field-title-text field-type-text field-label-hidden\">
+					{$item['header']}
+				</h2>
+				<div class=\"field field-name-field-body field-type-text-long field-label-hidden\">
+					<p>{$item['content']}</p>
+				</div>
+			";
+		}
+
+		// create the JS to make the markup function as an accordion
+        $script = "
+            (function ($) {
+                Drupal.attachBehaviors($('.jewel-accordion'));
+            })(jQuery);
+        ";
+
+        $markup = "
+            <div class=\"jewel-accordion\">
+                <div id=\"accordion\">
+                    {$markup}
+                </div>
+            </div>
+            <script type=\"text/javascript\">
+                {$script}
+            </script>
+        ";
+
+		return $markup;
+	}
+
+	/**
 	 * Removes some control characters from the given string.
 	 *
 	 * @param string $string The string from which to remove characters
