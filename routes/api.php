@@ -32,3 +32,6 @@ $router->get('institutes/{institute_id}/people', 'InstituteController@showPeople
 
 // temporary route to test accordion functionality
 $router->get('accordion', 'AccordionController@showData');
+
+// college information
+$router->get('colleges/{college_id}/publications', 'CitationsController@showCollegeCitations');

@@ -4,8 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ef917330744b9c3678c8a85df8bb9f4",
+    "content-hash": "911e6c4fd2a9ace8b7efe181494080c7",
     "packages": [
+        {
+            "name": "csun-metalab/laravel-guzzle",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/csun-metalab/laravel-guzzle.git",
+                "reference": "701658670aefdcf2616490ecf2e99f295716336b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/csun-metalab/laravel-guzzle/zipball/701658670aefdcf2616490ecf2e99f295716336b",
+                "reference": "701658670aefdcf2616490ecf2e99f295716336b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Guzzle/"
+                ],
+                "psr-4": {
+                    "CSUNMetaLab\\Guzzle\\": "src/Guzzle/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Fritz",
+                    "email": "mattf@burbankparanormal.com"
+                }
+            ],
+            "description": "Composer package for Laravel 5.0 and above that provides a consistent method of interacting with Guzzle.",
+            "time": "2018-04-20T17:34:32+00:00"
+        },
         {
             "name": "csun-metalab/lumen-force-https",
             "version": "1.0.0",
