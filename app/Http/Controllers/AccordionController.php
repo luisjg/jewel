@@ -34,9 +34,10 @@ class AccordionController extends Controller
 			],
 		];
 
-		// remove any control characters and send the response
+		// generate the accordion, remove any control characters, and then
+		// send the response
+		$markup = HandlerUtilities::weboneAccordionFromArray($data);
 		$markup = HandlerUtilities::removeControlCharacters($markup);
-		$markup = HandlerUtilities::weboneAccordionFromArray($markup);
 		return $this->sendResponse($markup);
 	}
 }
