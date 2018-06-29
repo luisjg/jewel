@@ -55,6 +55,19 @@ class CitationsController extends Controller
 					$citation->metadata->abstract :
 					"No abstract available");
 
+				// generate the header section (links to profiles function based
+				// on IEEE format of names currently)
+				$header = $citation->formatted;
+				foreach($citation->membership->members as $member) {
+					$name = "{$member->first_name[0]}. {$member->last_name}";
+					$profile = "
+						<a href=\"{$member->profile}\" target=\"_blank\">
+							{$name}
+						</a>
+					";
+					$header = str_replace($name, $profile, $header);
+				}
+
 				// generate the content section
 				$content = "
 					<p>
@@ -66,7 +79,7 @@ class CitationsController extends Controller
 				";
 
 				$years[$year][] = [
-					'header' => $citation->formatted,
+					'header' => $header,
 					'content' => $content,
 				];
 			}
