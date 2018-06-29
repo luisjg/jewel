@@ -103,6 +103,11 @@ class CitationsController extends Controller
                 Drupal.attachBehaviors($('.jewel-accordion'));
             })(jQuery);
 		</script>
+		<style type=\"text/css\">
+			.ui-accordion-header a {
+				padding: 0;
+			}
+		</style>
         ";
 
 		// remove any control characters, and then send the response
