@@ -40,7 +40,7 @@ class CitationsController extends Controller
 		// accordion headers
 		$markup = "
 		<style type=\"text/css\">
-			.ui-accordion-header a {
+			.ui-accordion-icons .ui-accordion-header a {
 				display:inline;
 				padding:0;
 				color:#000000;
