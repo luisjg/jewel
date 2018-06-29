@@ -44,6 +44,7 @@ class CitationsController extends Controller
 				display:inline;
 				padding:0;
 				color:#000000;
+				text-decoration:underline;
 			}
 		</style>";
 
