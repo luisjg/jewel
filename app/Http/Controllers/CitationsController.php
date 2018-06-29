@@ -35,7 +35,17 @@ class CitationsController extends Controller
 	public function showCollegeCitations($college_id) {
 		$url = config('webservices.citations') . "colleges/{$college_id}/citations";
 		$years = [];
-		$markup = "";
+
+		// markup begins with style overrides for inline anchor tags in the
+		// accordion headers
+		$markup = "
+		<style type=\"text/css\">
+			.ui-accordion-header a {
+				display:inline;
+				padding:0;
+				color:#000000;
+			}
+		</style>";
 
 		// make the call and resolve the response body
 		$response = $this->guzzle->get($url);
@@ -103,11 +113,6 @@ class CitationsController extends Controller
                 Drupal.attachBehaviors($('.jewel-accordion'));
             })(jQuery);
 		</script>
-		<style type=\"text/css\">
-			.ui-accordion-header a {
-				padding: 0;
-			}
-		</style>
         ";
 
 		// remove any control characters, and then send the response
