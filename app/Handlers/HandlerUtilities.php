@@ -39,7 +39,7 @@ class HandlerUtilities
 	 *
 	 * @example
 	 * $attributes = "key1:value1|key2:value2";
-	 * $arr = HandlerUtilities::pipedAttributesToArray($attributes);
+	 * $arr = HandlerUtilities::attributesToArray($attributes);
 	 * var_dump($arr);
 	 *
 	 * array(2) { ["key1"]=> string(6) "value1", ["key2"]=> string(6) "value2" }
@@ -78,7 +78,7 @@ class HandlerUtilities
 					{$item['header']}
 				</h2>
 				<div class=\"field field-name-field-body field-type-text-long field-label-hidden\">
-					<p>{$item['content']}</p>
+					{$item['content']}
 				</div>
 			";
 		}
