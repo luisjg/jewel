@@ -83,6 +83,15 @@ class CitationsController extends Controller
 			$markup .= HandlerUtilities::weboneAccordionFromArray($data);
 		}
 
+		// create the JS to make the markup function as an accordion
+        $markup .= "
+        <script type=\"text/javascript\">
+            (function ($) {
+                Drupal.attachBehaviors($('.jewel-accordion'));
+            })(jQuery);
+		</script>
+        ";
+
 		// remove any control characters, and then send the response
 		$markup = HandlerUtilities::removeControlCharacters($markup);
 		return $this->sendResponse($markup);
