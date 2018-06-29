@@ -63,7 +63,7 @@ class CitationsController extends Controller
 					<p>
 						{$abstract}
 					</p>
-				"
+				";
 
 				$years[$year][] = [
 					'header' => $citation->formatted,
