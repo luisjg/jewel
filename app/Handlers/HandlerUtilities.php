@@ -39,7 +39,7 @@ class HandlerUtilities
 	 *
 	 * @example
 	 * $attributes = "key1:value1|key2:value2";
-	 * $arr = HandlerUtilities::pipedAttributesToArray($attributes);
+	 * $arr = HandlerUtilities::attributesToArray($attributes);
 	 * var_dump($arr);
 	 *
 	 * array(2) { ["key1"]=> string(6) "value1", ["key2"]=> string(6) "value2" }
@@ -57,6 +57,41 @@ class HandlerUtilities
 		}
 
 		return array_combine($keys, $values);
+	}
+
+	/**
+	 * Takes an array of associative arrays and generates the markup that then
+	 * becomes a Web-One accordion. Each sub-array needs to have both a "header"
+	 * and "content" key that represent the appropriate part of each accordion
+	 * element.
+	 *
+	 * @param array $array The array to use for generating markup
+	 * @return string
+	 */
+	public static function weboneAccordionFromArray($array) {
+		$markup = "";
+
+		// generate the main accordion element markup
+		foreach($array as $item) {
+			$markup .= "
+				<h2 class=\"field field-name-field-title-text field-type-text field-label-hidden\">
+					{$item['header']}
+				</h2>
+				<div class=\"field field-name-field-body field-type-text-long field-label-hidden\">
+					{$item['content']}
+				</div>
+			";
+		}
+
+        $markup = "
+            <div class=\"jewel-accordion\">
+                <div id=\"accordion\">
+                    {$markup}
+                </div>
+            </div>
+        ";
+
+		return $markup;
 	}
 
 	/**
