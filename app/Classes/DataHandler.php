@@ -109,7 +109,9 @@ class DataHandler
         $deptList = self::applyJewelCss();
 
         foreach ($roles as $role => $data) {
+          if (!empty($data)) {
             $deptList .= "<h2 id='" . strtolower($role) . "'>" . ucwords($role) . "</h2>${data}<hr>";
+          }
         }
 
         // remove control characters from the output
