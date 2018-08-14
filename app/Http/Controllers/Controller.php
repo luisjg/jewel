@@ -13,8 +13,8 @@ class Controller extends BaseController
      * Parses the request type and sends the appropriate
      * Response
      *
-     * @param Collection $data the data object.
-     * @return mixed
+     * @param string $data The markup to send
+     * @return Response
      */
     protected function sendResponse($data)
     {

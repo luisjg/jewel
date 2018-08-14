@@ -84,6 +84,10 @@ $app->register(CSUNMetaLab\LumenForceHttps\Providers\ForceHttpsServiceProvider::
 $app->configure('proxypass');
 $app->register(CSUNMetaLab\LumenProxyPass\Providers\ProxyPassServiceProvider::class);
 
+$app->configure('guzzle');
+
+$app->configure('webservices');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
