@@ -86,7 +86,8 @@ class DataHandler
 
             // Interpolate & Append Markup
             if (array_key_exists($role_name, $roles)) {
-                $roles[$role_name] .= "
+              $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i;
+              $roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
 						<img class='jewel-img' src='{$person->profile_image_u_r_l}' alt='Image of {$person->display_name}'>
@@ -96,8 +97,8 @@ class DataHandler
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
-							<li class='jewel-url'><a target='_blank' href='//www.csun.edu/faculty/profiles/{$person->email_u_r_i}'>View Profile</a></li>
-						</ul>
+              <li class='jewel-url'><a target='_blank' href='{$profile_url}'>View Profile</a></li>
+            </ul>
 					</div>
 				</div>
 				";
