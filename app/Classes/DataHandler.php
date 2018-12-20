@@ -44,7 +44,7 @@ class DataHandler
         $roles = [
             'chair' => '',
             'faculty' => '',
-            'Lecturer' => '',
+            'Lecturers' => '',
             'emeritus' => ''
         ];
 
@@ -79,25 +79,32 @@ class DataHandler
 
                 // Assign Lecturers
                 if ($person->rank == 'Lecturer') {
-                    $role_name = $person->rank;
+                    $role_name = 'Lecturers';
                 }
 
             }
 
             // Interpolate & Append Markup
             if (array_key_exists($role_name, $roles)) {
-              $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i;
+              //Check if user has an official e-mail set, otherwise assign defaults
+              if (!empty($person->email_u_r_i)) {
+                $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i ;
+                $image_url = env('IMAGE_VIEW_LOCATION') . $person->email_u_r_i . '/avatar';
+              } else {
+                $profile_url = env('FACULTY_PROFILE_URL');
+                $image_url = env('FACULTY_PROFILE_URL') . 'imgs/profile-default.png';
+              }
               $roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='{$person->profile_image_u_r_l}' alt='Image of {$person->display_name}'>
+						<img class='jewel-img' src='{$image_url}' alt='Image of {$person->display_name}' height='150px'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
-              <li class='jewel-url'><a target='_blank' href='{$profile_url}'>View Profile</a></li>
+              <li class='jewel-url'><a target='_blank' href='{$profile_url}'>Faculty Profile</a></li>
             </ul>
 					</div>
 				</div>
@@ -110,7 +117,7 @@ class DataHandler
 
         foreach ($roles as $role => $data) {
           if (!empty($data)) {
-            $deptList .= "<h2 id='" . strtolower($role) . "'>" . ucwords($role) . "</h2>${data}<hr>";
+            $deptList .= "<div><h2 style='clear:both' id='" . strtolower($role) . "'><hr>" . ucwords($role) . "<hr></h2>{$data}</div>";
           }
         }
 
@@ -404,11 +411,12 @@ class DataHandler
      *
      * @return string
      */
-    private static function applyJewelCss()
+    public static function applyJewelCss()
     {
         return "
 		<style> 
 			.jewel-media{
+			  float: left;
 				margin: 25px 0;
 			}
 			.jewel-media-left{
@@ -418,7 +426,7 @@ class DataHandler
 			.jewel-media-body{
 				display: table-cell;
     			vertical-align: middle;
-    			width: 500px;
+    			width: 410px;
 			}
 			.jewel-url a{
 				color: #CF0A2C;

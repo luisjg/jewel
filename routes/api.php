@@ -35,3 +35,7 @@ $router->get('accordion', 'AccordionController@showData');
 
 // college information
 $router->get('colleges/{college_id}/publications', 'CitationsController@showCollegeCitations');
+
+
+//experimental route
+$router->get('colleges/{college_id}/people', 'DepartmentController@showCollegePeople');
