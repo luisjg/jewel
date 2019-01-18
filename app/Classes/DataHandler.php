@@ -417,6 +417,7 @@ class DataHandler
 		<style> 
 			.jewel-media{
 			  float: left;
+			  height: 165px;
 				margin: 25px 0;
 			}
 			.jewel-media-left{

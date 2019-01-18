@@ -34,16 +34,16 @@ class DepartmentController extends Controller
 	 */
 	public function showPeople($dept_id)
 	{
-//	    if (File::exists(storage_path('departments/' . $dept_id . '.txt'))) {
-//	        $deptList = File::get(storage_path('departments/' . $dept_id. '.txt'));
-//	        $process = new Process('php ../artisan update:departments ' . $dept_id . ' > /dev/null &');
-//	        $process->start();
-//        } else {
+	    if (File::exists(storage_path('departments/' . $dept_id . '.txt'))) {
+	        $deptList = File::get(storage_path('departments/' . $dept_id. '.txt'));
+	        $process = new Process('php ../artisan update:departments ' . $dept_id . ' > /dev/null &');
+	        $process->start();
+        } else {
             $deptList = DataHandler::getDepartmentData($dept_id);
             if ($this->findOrCreateDirectory('departments')) {
                 File::put(storage_path('departments/' . $dept_id . '.txt'), $deptList);
             }
-//        }
+        }
 		// send the response
 		return $this->sendResponse($deptList);
 	}
@@ -59,16 +59,19 @@ class DepartmentController extends Controller
     $academic_group_id = 'academic_groups:' . $college_id;
 
     // Temporary route that should be refactored and implemented appropriately later
-    $leads = DB::table('nemo.memberships')->where('parent_entities_id',$academic_group_id)->whereIn('role_position',['dean','associate_dean'])->get();
+    $leads = DB::table('nemo.memberships')->where('parent_entities_id',$academic_group_id)->whereIn('role_position',['dean','associate_dean','special_assistant'])->get();
 
-    $dean_id = $associate_dean_id = '';
+    $dean_id = $associate_dean_id = $special_assistant_id = [];
 
     foreach($leads as $lead) {
       if ($lead->role_position == 'dean') {
-        $dean_id = $lead->individuals_id;
+        $dean_id[] = $lead->individuals_id;
       }
       if ($lead->role_position == 'associate_dean') {
-        $associate_dean_id = $lead->individuals_id;
+        $associate_dean_id[] = $lead->individuals_id;
+      }
+      if ($lead->role_position == 'special_assistant') {
+        $special_assistant_id[] = $lead->individuals_id;
       }
     }
 
@@ -105,6 +108,7 @@ class DepartmentController extends Controller
     $roles = [
         'Dean' => '',
         'Associate Dean' => '',
+        'Special Assistant to the Dean' => '',
         'Department Chairs' => '',
         'faculty' => ''
     ];
@@ -133,10 +137,12 @@ class DepartmentController extends Controller
       // Assign Dean, Associate Dean, and Chairs
       if ($chair) {
         $role_name = "Department Chairs";
-      } else if ($person->individuals_id == $dean_id) {
+      } else if (in_array($person->individuals_id, $dean_id)) {
           $role_name = 'Dean';
-      } else if ($person->individuals_id == $associate_dean_id) {
+      } else if (in_array($person->individuals_id, $associate_dean_id)) {
           $role_name = 'Associate Dean';
+      } else if (in_array($person->individuals_id, $special_assistant_id)) {
+          $role_name = 'Special Assistant to the Dean';
       } else {
           $role_name = $person->affiliation;
       }
@@ -159,7 +165,7 @@ class DepartmentController extends Controller
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
-							<li class='jewel-role-name'>{$person->rank} of {$person->departmentUser[0]->department->name}</li>
+							<li class='jewel-role-name'>{$person->rank} <br> {$person->departmentUser[0]->department->name}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
               <li class='jewel-url'><a target='_blank' href='{$profile_url}'>Faculty Profile</a></li>
             </ul>
@@ -174,7 +180,7 @@ class DepartmentController extends Controller
 
     foreach ($roles as $role => $data) {
       if (!empty($data)) {
-        $collegeList .= "<div><h2 style='clear:both' id='" . strtolower($role) . "'><hr>" . ucwords($role) . "<hr></h2>{$data}</div>";
+        $collegeList .= "<div><h2 style='clear:both' id='" . strtolower($role) . "'><hr>" . ucfirst($role) . "<hr></h2>{$data}</div>";
       }
     }
 
