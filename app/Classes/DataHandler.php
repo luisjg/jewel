@@ -21,7 +21,6 @@ class DataHandler
         $persons = Person::whereHas('departmentUser', function ($q) use ($dept_id) {
             $q->where('department_id', 'academic_departments:' . $dept_id);
         })
-            ->with('image')
             // DO NOT LIST THE DECEASED
             ->where('deceased', '0')
             // DO NOT LIST THE INACTIVE
@@ -45,7 +44,7 @@ class DataHandler
             'chair' => '',
             'faculty' => '',
             'Lecturer' => '',
-            'emeritus' => ''
+            'Emeriti' => ''
         ];
 
 
@@ -70,49 +69,60 @@ class DataHandler
                 $department_email = $person->email;
             }
 
-            // Assign Chair and Run the rest of the Department Listing
+            // Assign Faculty
+            $role_name = $person->affiliation;
+
+            // Assign Chair
             if ($chair) {
                 $role_name = $chair->role_name;
-
-            } else {
-                $role_name = $person->affiliation;
-
-                // Assign Lecturers
-                if ($person->rank == 'Lecturer') {
-                    $role_name = $person->rank;
-                }
-
             }
 
-            // Interpolate & Append Markup
-            if (array_key_exists($role_name, $roles)) {
-              $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i;
-              $roles[$role_name] .= "
+            // Assign Emeriti
+            if ($person->affiliation == 'emeritus') {
+              $role_name = 'Emeriti';
+            }
+
+            //Assign Lecturers
+            if ($person->rank == 'Lecturer') {
+              $role_name = 'Lecturers';
+            }
+
+          // Interpolate & Append Markup
+          if (array_key_exists($role_name, $roles)) {
+            //Check if user has an official e-mail set, otherwise assign defaults
+            if (!empty($person->email_u_r_i)) {
+              $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i ;
+              $image_url = env('IMAGE_VIEW_LOCATION') . $person->email_u_r_i . '/avatar';
+            } else {
+              $profile_url = env('FACULTY_PROFILE_URL');
+              $image_url = env('FACULTY_PROFILE_URL') . 'imgs/profile-default.png';
+            }
+            $roles[$role_name] .= "
 				<div class='jewel-media'>
 					<div class='jewel-media-left'>
-						<img class='jewel-img' src='{$person->profile_image_u_r_l}' alt='Image of {$person->display_name}'>
+						<img class='jewel-img' src='{$image_url}' alt='{$person->display_name}' height='150px'>
 					</div>
 					<div class='jewel-media-body'>
 						<ul class='jewel'>
 							<li class='jewel-faculty-name'><h3 class='jewel-display-name'>{$person->display_name}</h3></li>
 							<li class='jewel-role-name'>{$person->rank}</li>
 							<li class='jewel-email'><strong>Email: </strong><a href='mailto:{$department_email}'>{$department_email}</a></li>
-              <li class='jewel-url'><a target='_blank' href='{$profile_url}'>View Profile</a></li>
+              <li class='jewel-url'><a target='_blank' href='{$profile_url}'>Faculty Profile</a></li>
             </ul>
 					</div>
 				</div>
 				";
-            }
+          }
         }
 
         // Build Department Listing
         $deptList = self::applyJewelCss();
 
-        foreach ($roles as $role => $data) {
-          if (!empty($data)) {
-            $deptList .= "<h2 id='" . strtolower($role) . "'>" . ucwords($role) . "</h2>${data}<hr>";
-          }
+      foreach ($roles as $role => $data) {
+        if (!empty($data)) {
+          $deptList .= "<div><h2 style='clear:both' id='" . strtolower($role) . "'><hr>" . ucwords($role) . "<hr></h2>{$data}</div>";
         }
+      }
 
         // remove control characters from the output
         return HandlerUtilities::removeControlCharacters($deptList);
