@@ -57,9 +57,10 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    CSUNMetaLab\LumenForceHttps\Http\Middleware\ForceHttps::class,
+    \Fruitcake\Cors\HandleCors::class
+]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
@@ -85,6 +86,8 @@ $app->register(CSUNMetaLab\LumenProxyPass\Providers\ProxyPassServiceProvider::cl
 $app->configure('guzzle');
 
 $app->configure('webservices');
+
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
