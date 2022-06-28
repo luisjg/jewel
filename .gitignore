@@ -8,3 +8,4 @@ Homestead.yaml
 .DS_Store
 Thumbs.db
 /storage
+.phpunit.result.cache
