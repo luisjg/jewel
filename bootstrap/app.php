@@ -20,11 +20,10 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 */
 
 $app = new Laravel\Lumen\Application(
-    realpath(__DIR__.'/../')
+    dirname(__DIR__)
 );
 
 $app->withFacades();
-
 $app->withEloquent();
 
 /*
@@ -50,6 +49,22 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Register Config Files
+|--------------------------------------------------------------------------
+|
+| Now we will register the "app" configuration file. If the file exists in
+| your configuration directory it will be loaded; otherwise, we'll load
+| the default version. You may register other files below as needed.
+|
+*/
+
+$app->configure('app');
+$app->configure('guzzle');
+$app->configure('webservices');
+$app->configure('cors');
+
+/*
+|--------------------------------------------------------------------------
 | Register Middleware
 |--------------------------------------------------------------------------
 |
@@ -60,7 +75,6 @@ $app->singleton(
 */
 
 $app->middleware([
-    CSUNMetaLab\LumenForceHttps\Http\Middleware\ForceHttps::class,
     \Fruitcake\Cors\HandleCors::class
 ]);
 
@@ -79,17 +93,9 @@ $app->middleware([
 |
 */
 
-$app->configure('forcehttps');
-$app->register(CSUNMetaLab\LumenForceHttps\Providers\ForceHttpsServiceProvider::class);
-
-$app->configure('proxypass');
-$app->register(CSUNMetaLab\LumenProxyPass\Providers\ProxyPassServiceProvider::class);
-
-$app->configure('guzzle');
-
-$app->configure('webservices');
-
-$app->configure('cors');
+// $app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
