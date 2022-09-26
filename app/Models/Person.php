@@ -46,8 +46,8 @@ class Person extends Model {
      */
     public function getProfileImageURLAttribute() {
         if ($this->image) {
-            if(env('IMAGE_VIEW_LOCATION')) {
-                return env('IMAGE_VIEW_LOCATION') . $this->emailURI .
+            if(config('app.image_location')) {
+                return config('app.image_location') . $this->emailURI .
                     '/' . $this->image->src;
             }
             return url('uploads/imgs/' . $this->emailURI .

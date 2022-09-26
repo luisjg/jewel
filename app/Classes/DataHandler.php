@@ -91,11 +91,11 @@ class DataHandler
           if (array_key_exists($role_name, $roles)) {
             //Check if user has an official e-mail set, otherwise assign defaults
             if (!empty($person->email_u_r_i)) {
-              $profile_url = env('FACULTY_PROFILE_URL') . $person->email_u_r_i ;
-              $image_url = env('IMAGE_VIEW_LOCATION') . $person->email_u_r_i . '/avatar';
+              $profile_url = config('webservices.faculty') . $person->email_u_r_i ;
+              $image_url = config('app.image_location') . $person->email_u_r_i . '/avatar';
             } else {
-              $profile_url = env('FACULTY_PROFILE_URL');
-              $image_url = env('FACULTY_PROFILE_URL') . 'imgs/profile-default.png';
+              $profile_url = config('webservices.faculty');
+              $image_url = config('webservices.faculty') . 'imgs/profile-default.png';
             }
             $roles[$role_name] .= "
 				<div class='jewel-media'>
